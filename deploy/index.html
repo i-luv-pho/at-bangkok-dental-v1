@@ -978,6 +978,448 @@
                 border-bottom: 0.5px solid var(--gray-100);
             }
         }
+
+        /* ============================================
+           BOOKING MODAL (Calendly)
+           ============================================ */
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition-medium);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            width: 90%;
+            max-width: 700px;
+            max-height: 85vh;
+            background: var(--white);
+            border-radius: 16px;
+            z-index: 2001;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition-medium);
+            overflow: hidden;
+        }
+
+        .modal-overlay.active + .modal-container,
+        .modal-container.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-3) var(--space-4);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .modal-header h3 {
+            font-family: var(--font-serif);
+            font-size: 1.25rem;
+            color: var(--text-primary);
+        }
+
+        .modal-close {
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: var(--gray-100);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-fast);
+        }
+
+        .modal-close:hover {
+            background: var(--gray-200);
+        }
+
+        .modal-close svg {
+            width: 20px;
+            height: 20px;
+            color: var(--gray-600);
+        }
+
+        .modal-body {
+            height: 600px;
+            max-height: calc(85vh - 70px);
+            overflow-y: auto;
+        }
+
+        .modal-body iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Modal Responsive */
+        @media (max-width: 768px) {
+            .modal-container {
+                width: 95%;
+                max-height: 90vh;
+            }
+
+            .modal-body {
+                height: 500px;
+                max-height: calc(90vh - 70px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .modal-container {
+                width: 100%;
+                max-width: 100%;
+                max-height: 100vh;
+                border-radius: 0;
+                top: 0;
+                left: 0;
+                transform: none;
+            }
+
+            .modal-overlay.active + .modal-container,
+            .modal-container.active {
+                transform: none;
+            }
+
+            .modal-body {
+                height: calc(100vh - 70px);
+                max-height: calc(100vh - 70px);
+            }
+        }
+
+        /* ============================================
+           FLOATING CONTACT BUTTONS
+           ============================================ */
+
+        .floating-buttons {
+            position: fixed;
+            bottom: var(--space-4);
+            right: var(--space-4);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+            z-index: 1500;
+        }
+
+        .float-btn {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            transition: var(--transition-fast);
+        }
+
+        .float-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .float-btn svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .float-btn.whatsapp {
+            background: #25D366;
+            color: white;
+        }
+
+        .float-btn.line {
+            background: #00B900;
+            color: white;
+        }
+
+        @media (max-width: 480px) {
+            .floating-buttons {
+                bottom: var(--space-2);
+                right: var(--space-2);
+            }
+
+            .float-btn {
+                width: 48px;
+                height: 48px;
+            }
+
+            .float-btn svg {
+                width: 24px;
+                height: 24px;
+            }
+        }
+
+        /* ============================================
+           CONTACT FORM
+           ============================================ */
+
+        .contact-form {
+            margin-top: var(--space-6);
+            padding-top: var(--space-6);
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .contact-form h3 {
+            font-size: 1.25rem;
+            margin-bottom: var(--space-3);
+        }
+
+        .form-group {
+            margin-bottom: var(--space-3);
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-1);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: var(--space-2) var(--space-3);
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            border: 1px solid var(--gray-300);
+            border-radius: 8px;
+            transition: var(--transition-fast);
+            background: var(--white);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(155, 138, 203, 0.15);
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-3);
+        }
+
+        .form-submit {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-2) var(--space-4);
+            background: var(--accent);
+            color: var(--white);
+            font-size: 1rem;
+            font-weight: 400;
+            border: none;
+            border-radius: 100px;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .form-submit:hover {
+            background: var(--purple-600);
+            transform: translateY(-2px);
+        }
+
+        .form-submit svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        @media (max-width: 480px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ============================================
+           TESTIMONIAL QUOTES
+           ============================================ */
+
+        .testimonial-quotes {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-4);
+            margin-top: var(--space-8);
+            padding: 0 var(--space-4);
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .quote-card {
+            background: var(--white);
+            padding: var(--space-4);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: var(--transition-medium);
+        }
+
+        .quote-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .quote-icon {
+            width: 32px;
+            height: 32px;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+            opacity: 0.5;
+        }
+
+        .quote-text {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            font-style: italic;
+            line-height: 1.6;
+            color: var(--text-primary);
+            margin-bottom: var(--space-3);
+        }
+
+        .quote-author {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .quote-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--purple-100);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-family: var(--font-serif);
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .quote-meta {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .quote-name {
+            font-weight: 400;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+        }
+
+        .quote-treatment {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 1024px) {
+            .testimonial-quotes {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .testimonial-quotes {
+                grid-template-columns: 1fr;
+                padding: 0 var(--space-3);
+            }
+        }
+
+        /* ============================================
+           TRUST BADGES SECTION
+           ============================================ */
+
+        .trust-section {
+            background: var(--purple-600);
+            color: var(--white);
+            padding: var(--space-12) var(--space-4);
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-6);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .trust-badge {
+            text-align: center;
+            padding: var(--space-4);
+        }
+
+        .trust-icon {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto var(--space-3);
+            color: var(--purple-200);
+        }
+
+        .trust-badge h4 {
+            font-family: var(--font-sans);
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: var(--space-1);
+            color: var(--white);
+        }
+
+        .trust-badge p {
+            font-size: 0.875rem;
+            color: var(--purple-200);
+            margin: 0;
+        }
+
+        @media (max-width: 1024px) {
+            .trust-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .trust-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-4);
+            }
+
+            .trust-badge {
+                padding: var(--space-3);
+            }
+
+            .trust-icon {
+                width: 48px;
+                height: 48px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1072,6 +1514,40 @@
         </div>
     </section>
 
+    <!-- Trust Badges Section -->
+    <section class="trust-section">
+        <div class="trust-grid">
+            <div class="trust-badge fade-in">
+                <svg class="trust-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                </svg>
+                <h4>Thai Dental Council</h4>
+                <p>Fully Licensed & Certified</p>
+            </div>
+            <div class="trust-badge fade-in">
+                <svg class="trust-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <h4>40+ Years</h4>
+                <p>Clinical Excellence</p>
+            </div>
+            <div class="trust-badge fade-in">
+                <svg class="trust-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
+                </svg>
+                <h4>International Training</h4>
+                <p>Sydney, Boston, Temple</p>
+            </div>
+            <div class="trust-badge fade-in">
+                <svg class="trust-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+                </svg>
+                <h4>5-Star Rated</h4>
+                <p>Trusted by Thousands</p>
+            </div>
+        </div>
+    </section>
+
     <!-- Services Section -->
     <section class="services" id="services">
         <div class="container">
@@ -1139,6 +1615,49 @@
                 <div class="carousel-item">Patient Photo 6</div>
             </div>
         </div>
+
+        <!-- Testimonial Quotes -->
+        <div class="testimonial-quotes">
+            <div class="quote-card fade-in">
+                <svg class="quote-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                </svg>
+                <p class="quote-text">"Dr. Photjana transformed my smile completely. After 40 years of feeling self-conscious, I finally have the confidence to smile in photos. The results exceeded my expectations."</p>
+                <div class="quote-author">
+                    <div class="quote-avatar">S</div>
+                    <div class="quote-meta">
+                        <span class="quote-name">Somchai P.</span>
+                        <span class="quote-treatment">Clear Aligners Treatment</span>
+                    </div>
+                </div>
+            </div>
+            <div class="quote-card fade-in">
+                <svg class="quote-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                </svg>
+                <p class="quote-text">"The clinic is immaculate and the staff are incredibly professional. My daughter's braces treatment was handled with such care. We couldn't be happier with the results."</p>
+                <div class="quote-author">
+                    <div class="quote-avatar">N</div>
+                    <div class="quote-meta">
+                        <span class="quote-name">Nattaya K.</span>
+                        <span class="quote-treatment">Traditional Braces</span>
+                    </div>
+                </div>
+            </div>
+            <div class="quote-card fade-in">
+                <svg class="quote-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                </svg>
+                <p class="quote-text">"As an expat, finding a dentist I could trust was challenging. Dr. Photjana's international credentials and expertise made all the difference. World-class care right here in Bangkok."</p>
+                <div class="quote-author">
+                    <div class="quote-avatar">M</div>
+                    <div class="quote-meta">
+                        <span class="quote-name">Michael R.</span>
+                        <span class="quote-treatment">Bite Correction</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Location Section -->
@@ -1168,6 +1687,37 @@
                         </svg>
                         02-279-6990
                     </a>
+
+                    <!-- Contact Form -->
+                    <div class="contact-form">
+                        <h3>Send Us a Message</h3>
+                        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" id="contact-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input type="text" id="name" name="name" placeholder="Your name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Phone</label>
+                                    <input type="tel" id="phone" name="phone" placeholder="Your phone number">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" placeholder="How can we help you?" required></textarea>
+                            </div>
+                            <button type="submit" class="form-submit">
+                                Send Message
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1189,6 +1739,49 @@
             </a>
         </div>
     </section>
+
+    <!-- Booking Modal -->
+    <div class="modal-overlay" id="modal-overlay"></div>
+    <div class="modal-container" id="booking-modal">
+        <div class="modal-header">
+            <h3>Book Your Appointment</h3>
+            <button class="modal-close" id="modal-close" aria-label="Close modal">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <div class="modal-body">
+            <!-- Replace YOUR_CALENDLY_USERNAME with actual Calendly URL -->
+            <iframe
+                src="https://calendly.com/YOUR_CALENDLY_USERNAME"
+                title="Schedule Appointment"
+                loading="lazy">
+            </iframe>
+        </div>
+    </div>
+
+    <!-- Floating Contact Buttons -->
+    <div class="floating-buttons">
+        <a href="https://wa.me/6622796990?text=Hello%2C%20I%20would%20like%20to%20book%20an%20appointment%20at%20%40Bangkok%20Dental%20Clinic"
+           class="float-btn whatsapp"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="Chat on WhatsApp">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+        </a>
+        <a href="https://line.me/ti/p/@bangkokdental"
+           class="float-btn line"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="Chat on LINE">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
+            </svg>
+        </a>
+    </div>
 
     <!-- Footer -->
     <footer>
@@ -1262,11 +1855,20 @@
 
             fadeElements.forEach(el => observer.observe(el));
 
-            // Smooth scroll for anchor links
+            // Smooth scroll for anchor links (except booking buttons)
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+
+                    // Booking buttons open modal instead
+                    if (href === '#booking' || this.classList.contains('hero-cta') || this.classList.contains('nav-cta') || this.classList.contains('booking-cta')) {
+                        e.preventDefault();
+                        openBookingModal();
+                        return;
+                    }
+
                     e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
+                    const target = document.querySelector(href);
                     if (target) {
                         target.scrollIntoView({
                             behavior: 'smooth',
@@ -1275,6 +1877,68 @@
                     }
                 });
             });
+
+            // Booking Modal Functionality
+            const modalOverlay = document.getElementById('modal-overlay');
+            const bookingModal = document.getElementById('booking-modal');
+            const modalClose = document.getElementById('modal-close');
+
+            function openBookingModal() {
+                modalOverlay.classList.add('active');
+                bookingModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeBookingModal() {
+                modalOverlay.classList.remove('active');
+                bookingModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            // Close modal on overlay click
+            modalOverlay.addEventListener('click', closeBookingModal);
+
+            // Close modal on close button click
+            modalClose.addEventListener('click', closeBookingModal);
+
+            // Close modal on Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && bookingModal.classList.contains('active')) {
+                    closeBookingModal();
+                }
+            });
+
+            // Make booking CTA open modal
+            const bookingCta = document.querySelector('.booking-cta');
+            if (bookingCta) {
+                bookingCta.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openBookingModal();
+                });
+            }
+
+            // Mobile menu booking link
+            const mobileBookingLink = document.querySelector('.mobile-menu a[href="#booking"]');
+            if (mobileBookingLink) {
+                mobileBookingLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    mobileMenu.classList.remove('active');
+                    document.body.classList.remove('menu-open');
+                    setTimeout(openBookingModal, 300);
+                });
+            }
+
+            // Contact form submission
+            const contactForm = document.getElementById('contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    // For now, let form submit naturally to Formspree
+                    // Add validation or custom handling here if needed
+                    const submitBtn = contactForm.querySelector('.form-submit');
+                    submitBtn.textContent = 'Sending...';
+                    submitBtn.disabled = true;
+                });
+            }
         });
     </script>
 </body>
