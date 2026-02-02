@@ -94,41 +94,41 @@ Deferred to future release. Tracked but not in current roadmap.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| HERO-01 | TBD | Pending |
-| HERO-02 | TBD | Pending |
-| HERO-03 | TBD | Pending |
-| HERO-04 | TBD | Pending |
-| NAV-01 | TBD | Pending |
-| NAV-02 | TBD | Pending |
-| NAV-03 | TBD | Pending |
-| CRED-01 | TBD | Pending |
-| CRED-02 | TBD | Pending |
-| CRED-03 | TBD | Pending |
-| CRED-04 | TBD | Pending |
-| SERV-01 | TBD | Pending |
-| SERV-02 | TBD | Pending |
-| SERV-03 | TBD | Pending |
-| SOCIAL-01 | TBD | Pending |
-| SOCIAL-02 | TBD | Pending |
-| SOCIAL-03 | TBD | Pending |
-| LOC-01 | TBD | Pending |
-| LOC-02 | TBD | Pending |
-| LOC-03 | TBD | Pending |
-| BOOK-01 | TBD | Pending |
-| BOOK-02 | TBD | Pending |
-| BOOK-03 | TBD | Pending |
-| DESIGN-01 | TBD | Pending |
-| DESIGN-02 | TBD | Pending |
-| DESIGN-03 | TBD | Pending |
-| DESIGN-04 | TBD | Pending |
-| DESIGN-05 | TBD | Pending |
-| DESIGN-06 | TBD | Pending |
+| DESIGN-01 | Phase 1 | Pending |
+| DESIGN-02 | Phase 1 | Pending |
+| DESIGN-03 | Phase 1 | Pending |
+| DESIGN-04 | Phase 1 | Pending |
+| DESIGN-05 | Phase 1 | Pending |
+| DESIGN-06 | Phase 1 | Pending |
+| NAV-01 | Phase 2 | Pending |
+| NAV-02 | Phase 2 | Pending |
+| NAV-03 | Phase 2 | Pending |
+| HERO-01 | Phase 3 | Pending |
+| HERO-02 | Phase 3 | Pending |
+| HERO-03 | Phase 3 | Pending |
+| HERO-04 | Phase 3 | Pending |
+| CRED-01 | Phase 4 | Pending |
+| CRED-02 | Phase 4 | Pending |
+| CRED-03 | Phase 4 | Pending |
+| CRED-04 | Phase 4 | Pending |
+| SERV-01 | Phase 4 | Pending |
+| SERV-02 | Phase 4 | Pending |
+| SERV-03 | Phase 4 | Pending |
+| SOCIAL-01 | Phase 5 | Pending |
+| SOCIAL-02 | Phase 5 | Pending |
+| SOCIAL-03 | Phase 5 | Pending |
+| LOC-01 | Phase 5 | Pending |
+| LOC-02 | Phase 5 | Pending |
+| LOC-03 | Phase 5 | Pending |
+| BOOK-01 | Phase 6 | Pending |
+| BOOK-02 | Phase 6 | Pending |
+| BOOK-03 | Phase 6 | Pending |
 
 **Coverage:**
 - v1 requirements: 25 total
-- Mapped to phases: 0
-- Unmapped: 25 (pending roadmap creation)
+- Mapped to phases: 25
+- Unmapped: 0
 
 ---
 *Requirements defined: 2025-02-01*
-*Last updated: 2025-02-01 after initial definition*
+*Last updated: 2025-02-01 after roadmap creation*
