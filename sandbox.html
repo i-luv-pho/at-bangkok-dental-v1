@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Sandbox | DDI - Design & Digital Innovation</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #000000;
+            --white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            overflow-y: scroll;
+            scrollbar-gutter: stable;
+        }
+
+        body {
+            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            padding-top: 72px;
+            animation: pageEntrance 1.2s ease-out;
+        }
+
+        body.menu-open {
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+        }
+
+        @keyframes pageEntrance {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Scroll indicator line */
+        .scroll-line {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 60px;
+            background: currentColor;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.8; }
+        }
+
+        /* NOISE TEXTURE */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            z-index: 9998;
+        }
+
+        /* NAVIGATION */
+        .nav-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 16px 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-header.scrolled {
+            padding: 12px 0;
+            background: rgba(0, 0, 0, 0.95);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: white;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: white;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: white;
+            color: black;
+            padding: 10px 24px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-cta:hover {
+            background: transparent;
+            color: white;
+            box-shadow: inset 0 0 0 2px white;
+        }
+
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1001;
+        }
+
+        .nav-hamburger span {
+            width: 24px;
+            height: 2px;
+            background: white;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .nav-hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .nav-hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        .nav-mobile {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            max-width: 320px;
+            background: rgba(0, 0, 0, 0.98);
+            z-index: 999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 32px;
+            transform: translateX(100%);
+            pointer-events: none;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-mobile.active {
+            transform: translateX(0);
+            pointer-events: auto;
+        }
+
+        .nav-mobile .nav-link {
+            opacity: 0;
+            transform: translateX(20px);
+            transition: opacity 0.3s ease, transform 0.3s ease, color 0.3s ease;
+        }
+
+        .nav-mobile.active .nav-link {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .nav-mobile .nav-link:nth-child(1) { transition-delay: 0.05s; }
+        .nav-mobile .nav-link:nth-child(2) { transition-delay: 0.1s; }
+        .nav-mobile .nav-link:nth-child(3) { transition-delay: 0.15s; }
+        .nav-mobile .nav-link:nth-child(4) { transition-delay: 0.2s; }
+        .nav-mobile .nav-link:nth-child(5) { transition-delay: 0.25s; }
+
+        /* v14 Touch feedback */
+        .btn:active, .nav-cta:active { transform: scale(0.97) !important; transition: transform 0.1s ease !important; }
+        .mentor-card:active, .process-step:active { transform: scale(0.98) !important; transition: transform 0.1s ease !important; }
+        .nav-link:active { opacity: 0.5; }
+
+        /* v14 Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            .fade-in { opacity: 1 !important; transform: none !important; }
+        }
+
+        .nav-mobile .nav-link {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .nav-mobile .nav-cta {
+            margin-top: 24px;
+            padding: 14px 32px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+            .nav-cta:not(.nav-mobile .nav-cta) { display: none; }
+            .nav-hamburger { display: flex; }
+            .nav-mobile { display: flex; }
+            body { padding-top: 64px; }
+        }
+
+        /* SECTIONS */
+        section {
+            min-height: 100vh;
+            padding: 120px 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .section-dark {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .section-light {
+            background: var(--white);
+            color: var(--black);
+        }
+
+        /* TYPOGRAPHY */
+        .page-title {
+            font-size: clamp(48px, 12vw, 120px);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 0.95;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: clamp(36px, 8vw, 72px);
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            font-weight: 500;
+            opacity: 0.8;
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .caps {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+        }
+
+        /* ANIMATIONS */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stagger > *:nth-child(1) { transition-delay: 0s; }
+        .stagger > *:nth-child(2) { transition-delay: 0.1s; }
+        .stagger > *:nth-child(3) { transition-delay: 0.15s; }
+        .stagger > *:nth-child(4) { transition-delay: 0.2s; }
+
+        /* WHAT IS SANDBOX */
+        .sandbox-intro {
+            max-width: 700px;
+            text-align: center;
+            margin-top: 48px;
+        }
+
+        .sandbox-intro p {
+            font-size: 18px;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        /* PROCESS FLOW */
+        .process-section {
+            margin-top: 64px;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-top: 48px;
+        }
+
+        .process-step {
+            border: 2px solid currentColor;
+            padding: 40px 24px;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .process-step:hover {
+            background: var(--white);
+            color: var(--black);
+            transform: translateY(-8px);
+        }
+
+        .process-number {
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 16px;
+            opacity: 0.3;
+        }
+
+        .process-title {
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .process-desc {
+            font-size: 13px;
+            line-height: 1.7;
+            opacity: 0.8;
+        }
+
+        .process-arrow {
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+            opacity: 0.4;
+        }
+
+        .process-step:last-child .process-arrow {
+            display: none;
+        }
+
+        /* FUNDING HIGHLIGHT */
+        .funding-box {
+            margin-top: 64px;
+            padding: 64px 48px;
+            border: 3px solid currentColor;
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .funding-amount {
+            font-size: clamp(48px, 10vw, 80px);
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+
+        .funding-label {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            opacity: 0.7;
+            margin-bottom: 24px;
+        }
+
+        .funding-desc {
+            font-size: 16px;
+            line-height: 1.7;
+            opacity: 0.8;
+        }
+
+        /* SUPPORT SYSTEM */
+        .support-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            max-width: 900px;
+            margin-top: 64px;
+        }
+
+        .support-item {
+            text-align: center;
+            padding: 32px;
+        }
+
+        .support-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .support-title {
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .support-desc {
+            font-size: 14px;
+            line-height: 1.7;
+            opacity: 0.7;
+        }
+
+        /* MENTORS */
+        .mentors-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            max-width: 500px;
+            margin-top: 48px;
+        }
+
+        .mentor-item {
+            border: 1px solid currentColor;
+            padding: 24px 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .mentor-item:hover {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .mentor-name {
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .mentor-company {
+            font-size: 11px;
+            opacity: 0.6;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .mentor-note {
+            margin-top: 32px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            opacity: 0.5;
+        }
+
+        /* SUCCESS STORY */
+        .success-card {
+            border: 3px solid currentColor;
+            padding: 48px;
+            max-width: 700px;
+            margin-top: 48px;
+            text-align: center;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .success-card:hover {
+            background: var(--white);
+            color: var(--black);
+            transform: translateY(-8px);
+        }
+
+        .success-card .success-cta {
+            display: inline-block;
+            margin-top: 16px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .success-card:hover .success-cta {
+            opacity: 1;
+            transform: translateX(4px);
+        }
+
+        .success-amount {
+            font-size: clamp(40px, 8vw, 64px);
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+
+        .success-label {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            opacity: 0.7;
+            margin-bottom: 24px;
+        }
+
+        .success-team {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .success-product {
+            font-size: 16px;
+            opacity: 0.8;
+            margin-bottom: 16px;
+        }
+
+        .success-desc {
+            font-size: 14px;
+            line-height: 1.7;
+            opacity: 0.7;
+        }
+
+        /* PARTNERS */
+        .partners-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            justify-content: center;
+            max-width: 900px;
+            margin-top: 48px;
+        }
+
+        .partner-item {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            padding: 16px 24px;
+            border: 1px solid currentColor;
+            opacity: 0.6;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .partner-item:hover {
+            opacity: 1;
+            background: var(--white);
+            color: var(--black);
+        }
+
+        a.partner-item {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        a.process-step {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        a.mentor-item {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        /* WHY SANDBOX */
+        .why-list {
+            max-width: 700px;
+            margin-top: 48px;
+        }
+
+        .why-item {
+            display: flex;
+            gap: 24px;
+            padding: 32px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            align-items: flex-start;
+        }
+
+        .why-item:first-child {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .why-number {
+            font-size: 14px;
+            font-weight: 700;
+            opacity: 0.4;
+            min-width: 24px;
+        }
+
+        .why-content h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .why-content p {
+            font-size: 14px;
+            line-height: 1.7;
+            opacity: 0.7;
+        }
+
+        /* BUTTONS */
+        .btn {
+            display: inline-block;
+            padding: 18px 56px;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: 3px solid currentColor;
+            transition: all 0.3s ease;
+        }
+
+        .section-dark .btn {
+            background: var(--white);
+            color: var(--black);
+            border-color: var(--white);
+        }
+
+        .section-dark .btn:hover {
+            background: transparent;
+            color: var(--white);
+        }
+
+        .section-light .btn {
+            background: var(--black);
+            color: var(--white);
+            border-color: var(--black);
+        }
+
+        .section-light .btn:hover {
+            background: transparent;
+            color: var(--black);
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--black);
+            color: var(--white);
+            padding: 80px 24px;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            margin-bottom: 24px;
+        }
+
+        .footer-text {
+            font-size: 13px;
+            opacity: 0.5;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .process-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .process-arrow {
+                display: none;
+            }
+            .mentors-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 80px 20px;
+            }
+            .process-grid {
+                grid-template-columns: 1fr;
+                max-width: 350px;
+            }
+            .support-grid {
+                grid-template-columns: 1fr;
+                max-width: 350px;
+            }
+            .mentors-grid {
+                grid-template-columns: 1fr;
+                max-width: 280px;
+            }
+            .funding-box {
+                padding: 48px 32px;
+            }
+            .why-item {
+                flex-direction: column;
+                gap: 12px;
+            }
+        }
+
+        /* ============================================
+           SANDBOX HERO - VANTA.JS NET BACKGROUND
+           ============================================ */
+
+        #sandbox-hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #sandbox-hero > *:not(.vanta-canvas) {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Constellation particles for dark sections */
+        #phases,
+        #sandbox-success {
+            position: relative;
+        }
+        #phases > *:not(.particles-canvas),
+        #sandbox-success > *:not(.particles-canvas) {
+            position: relative;
+            z-index: 2;
+        }
+        .particles-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* ============================================
+           BUILDING BLOCKS VISUAL
+           ============================================ */
+        .building-visual {
+            position: relative;
+            width: 320px;
+            height: 280px;
+            margin: 48px auto 24px;
+        }
+
+        .block {
+            position: absolute;
+            border: 2px solid var(--black);
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .block-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        /* Main stacked blocks */
+        .block-1 { width: 200px; height: 50px; bottom: 0; left: 50%; transform: translateX(-50%); }
+        .block-2 { width: 170px; height: 50px; bottom: 55px; left: 50%; transform: translateX(-50%); }
+        .block-3 { width: 140px; height: 50px; bottom: 110px; left: 50%; transform: translateX(-50%); }
+        .block-4 { width: 110px; height: 50px; bottom: 165px; left: 50%; transform: translateX(-50%); }
+
+        /* Floating side elements */
+        .block-side-1 { width: 40px; height: 40px; top: 20px; left: 10px; opacity: 0.3; }
+        .block-side-2 { width: 30px; height: 30px; top: 80px; right: 20px; opacity: 0.2; }
+        .block-side-3 { width: 25px; height: 25px; bottom: 100px; left: 20px; opacity: 0.15; }
+        .block-side-4 { width: 35px; height: 35px; bottom: 40px; right: 10px; opacity: 0.25; }
+
+        /* Floating circles */
+        .block-circle {
+            border-radius: 50%;
+        }
+        .block-circle-1 { width: 20px; height: 20px; top: 60px; left: 40px; opacity: 0.2; }
+        .block-circle-2 { width: 15px; height: 15px; top: 120px; right: 40px; opacity: 0.15; }
+
+        .building-caption {
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            opacity: 0.6;
+            margin-top: 16px;
+        }
+
+        /* ============================================
+           DIAMOND FLOWCHART - 4 PHASES
+           ============================================ */
+        .phases-diamond {
+            margin-top: 48px;
+            width: 100%;
+            max-width: 700px;
+        }
+
+        .phases-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+
+        .phase-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 48px;
+        }
+
+        .phase-row-center {
+            margin: 24px 0;
+        }
+
+        .phase-box {
+            border: 2px solid currentColor;
+            padding: 24px 32px;
+            text-align: center;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            min-width: 160px;
+            transition: all 0.3s ease;
+            background: transparent;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .phase-box::after {
+            content: '→';
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+
+        .phase-box:hover {
+            background: var(--white);
+            color: var(--black);
+            transform: scale(1.05);
+        }
+
+        .phase-box:hover::after {
+            opacity: 1;
+            right: 8px;
+        }
+
+        .phase-num {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            opacity: 0.4;
+            margin-bottom: 8px;
+        }
+
+        .phase-name {
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .phase-desc {
+            font-size: 12px;
+            opacity: 0.7;
+            line-height: 1.5;
+        }
+
+        .phase-connector {
+            width: 2px;
+            height: 24px;
+            background: currentColor;
+            opacity: 0.3;
+        }
+
+        .phase-arrow {
+            font-size: 24px;
+            opacity: 0.4;
+        }
+
+        /* ============================================
+           CHOOSE YOUR PATH - DECISION TREE
+           ============================================ */
+        .path-section {
+            margin-top: 48px;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .path-visual {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .path-start {
+            border: 2px solid currentColor;
+            padding: 20px 40px;
+            text-align: center;
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .path-start-title {
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .path-start-sub {
+            font-size: 12px;
+            opacity: 0.6;
+            margin-top: 4px;
+        }
+
+        .path-trunk {
+            width: 2px;
+            height: 40px;
+            background: currentColor;
+            opacity: 0.3;
+        }
+
+        .path-spread {
+            width: 60%;
+            height: 2px;
+            background: currentColor;
+            opacity: 0.3;
+        }
+
+        .path-options {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 900px;
+            gap: 24px;
+            margin-top: 0;
+        }
+
+        .path-option {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .path-option-line {
+            width: 2px;
+            height: 40px;
+            background: currentColor;
+            opacity: 0.3;
+        }
+
+        .path-card {
+            border: 2px solid currentColor;
+            padding: 24px;
+            text-align: center;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            width: 100%;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .path-card:hover {
+            background: var(--black);
+            color: var(--white);
+            transform: translateY(-4px);
+        }
+
+        .path-card-cta {
+            display: block;
+            margin-top: 16px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            opacity: 0.5;
+            transition: all 0.3s ease;
+        }
+
+        .path-card:hover .path-card-cta {
+            opacity: 1;
+            transform: translateX(4px);
+        }
+
+        .path-badge {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border: 1px solid currentColor;
+            margin-bottom: 12px;
+            opacity: 0.7;
+        }
+
+        .path-card-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .path-card-desc {
+            font-size: 13px;
+            opacity: 0.7;
+            line-height: 1.5;
+        }
+
+        .path-suboptions {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 16px;
+            width: 100%;
+        }
+
+        .path-suboption {
+            font-size: 12px;
+            font-weight: 500;
+            padding: 10px 16px;
+            border: 1px solid rgba(0,0,0,0.2);
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s ease;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .path-suboption::after {
+            content: ' →';
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .path-suboption:hover {
+            background: var(--black);
+            color: var(--white);
+            border-color: var(--black);
+            padding-right: 24px;
+        }
+
+        .path-suboption:hover::after {
+            opacity: 1;
+        }
+
+        /* ============================================
+           FACULTY GRID
+           ============================================ */
+        .faculty-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            max-width: 900px;
+            margin-top: 48px;
+        }
+
+        .faculty-card {
+            border: 2px solid currentColor;
+            padding: 32px 24px;
+            text-align: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            cursor: pointer;
+        }
+
+        .faculty-card:hover {
+            background: var(--white);
+            color: var(--black);
+            transform: translateY(-4px);
+        }
+
+        .faculty-cta {
+            display: block;
+            margin-top: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .faculty-card:hover .faculty-cta {
+            opacity: 0.7;
+        }
+
+        .faculty-name {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .faculty-role {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            opacity: 0.6;
+            margin-bottom: 12px;
+        }
+
+        .faculty-credential {
+            font-size: 13px;
+            opacity: 0.8;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .faculty-expertise {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            opacity: 0.5;
+        }
+
+        .faculty-cta {
+            display: block;
+            margin-top: 16px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            opacity: 0.6;
+        }
+
+        /* Responsive for new sections */
+        @media (max-width: 768px) {
+            .building-visual {
+                width: 260px;
+                height: 240px;
+            }
+            .block-1 { width: 160px; height: 45px; }
+            .block-2 { width: 135px; height: 45px; bottom: 50px; }
+            .block-3 { width: 110px; height: 45px; bottom: 100px; }
+            .block-4 { width: 85px; height: 45px; bottom: 150px; }
+            .phase-row { flex-direction: column; gap: 16px; }
+            .phase-row-center { flex-direction: column; }
+            .phase-arrow { transform: rotate(90deg); }
+            .path-options { flex-direction: column; }
+            .path-spread { display: none; }
+            .faculty-grid { grid-template-columns: 1fr; max-width: 350px; }
+            .faculty-name { font-size: 15px; word-wrap: break-word; }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <header class="nav-header">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">DDI</a>
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="sandbox.html" class="nav-link active">Sandbox</a>
+                <a href="faq.html" class="nav-link">FAQ</a>
+            </nav>
+            <a href="apply.html" class="nav-cta">Apply Now</a>
+            <button class="nav-hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <div class="nav-mobile">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="sandbox.html" class="nav-link">Sandbox</a>
+        <a href="faq.html" class="nav-link">FAQ</a>
+        <a href="apply.html" class="nav-cta">Apply Now</a>
+    </div>
+
+    <!-- HERO with Vanta.js NET background -->
+    <section id="sandbox-hero" class="section-dark">
+        <h1 class="page-title fade-in" style="margin: 24px 0;">THE SANDBOX</h1>
+        <p class="subtitle fade-in">A playground for entrepreneurs. Experiment, fail fast, and build real businesses before you graduate.</p>
+        <div class="scroll-line"></div>
+    </section>
+
+    <!-- WHAT IS SANDBOX -->
+    <section class="section-light">
+        <h2 class="section-title fade-in" style="margin: 16px 0;">LEARN BY DOING</h2>
+
+        <!-- Building Blocks Visual -->
+        <div class="building-visual fade-in">
+            <!-- Main stacked blocks -->
+            <div class="block block-1"><span class="block-label">Foundation</span></div>
+            <div class="block block-2"><span class="block-label">Validate</span></div>
+            <div class="block block-3"><span class="block-label">Build</span></div>
+            <div class="block block-4"><span class="block-label">Launch</span></div>
+            <!-- Floating side elements -->
+            <div class="block block-side-1"></div>
+            <div class="block block-side-2"></div>
+            <div class="block block-side-3"></div>
+            <div class="block block-side-4"></div>
+            <div class="block block-circle block-circle-1"></div>
+            <div class="block block-circle block-circle-2"></div>
+        </div>
+        <p class="building-caption fade-in">Build your business block by block</p>
+
+        <div class="sandbox-intro fade-in">
+            <p>The Sandbox is DDI's signature hands-on entrepreneurship experience. It's a space where you can experiment and start a real business—testing ideas without fear of failure.</p>
+        </div>
+
+        <div class="sandbox-intro fade-in" style="margin-top: 24px;">
+            <p>Think of it as a playground for entrepreneurs. You gain practical business experience through trial-and-error in a supported environment before entering the actual marketplace.</p>
+        </div>
+    </section>
+
+    <!-- PROCESS - Diamond Flowchart -->
+    <section id="phases" class="section-dark">
+        <h2 class="section-title fade-in" style="margin: 16px 0;">4 PHASES</h2>
+
+        <div class="phases-diamond fade-in">
+            <div class="phases-container">
+                <!-- Top: IDEATE -->
+                <div class="phase-row">
+                    <a href="phases/ideate.html" class="phase-box">
+                        <div class="phase-num">01</div>
+                        <h3 class="phase-name">Ideate</h3>
+                        <p class="phase-desc">Design thinking workshops and market research</p>
+                    </a>
+                </div>
+
+                <!-- Connector -->
+                <div class="phase-connector"></div>
+
+                <!-- Middle: VALIDATE <-> BUILD -->
+                <div class="phase-row phase-row-center">
+                    <a href="phases/validate.html" class="phase-box">
+                        <div class="phase-num">02</div>
+                        <h3 class="phase-name">Validate</h3>
+                        <p class="phase-desc">Test with real customers</p>
+                    </a>
+                    <span class="phase-arrow">&harr;</span>
+                    <a href="phases/build.html" class="phase-box">
+                        <div class="phase-num">03</div>
+                        <h3 class="phase-name">Build</h3>
+                        <p class="phase-desc">Create MVP, start operations</p>
+                    </a>
+                </div>
+
+                <!-- Connector -->
+                <div class="phase-connector"></div>
+
+                <!-- Bottom: LAUNCH -->
+                <div class="phase-row">
+                    <a href="phases/launch.html" class="phase-box">
+                        <div class="phase-num">04</div>
+                        <h3 class="phase-name">Launch</h3>
+                        <p class="phase-desc">Go to market, acquire customers, generate revenue</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <p class="subtitle fade-in" style="margin-top: 48px; font-size: 14px; opacity: 0.6;">Iterate between phases until you find product-market fit</p>
+    </section>
+
+    <!-- FUNDING -->
+    <section class="section-light">
+        <h2 class="section-title fade-in" style="margin: 16px 0;">SEED FUNDING</h2>
+
+        <div class="funding-box fade-in">
+            <div class="funding-amount">฿150K</div>
+            <div class="funding-label">Per Team</div>
+            <p class="funding-desc">Students receive funding from Assumption University to create their own businesses. This isn't play money—it's real capital to launch real ventures.</p>
+        </div>
+    </section>
+
+    <!-- SUCCESS STORIES -->
+    <section id="sandbox-success" class="section-dark">
+        <h2 class="section-title fade-in" style="margin: 16px 0;">SANDBOX SUCCESS</h2>
+
+        <a href="success/zeri.html" class="success-card fade-in" style="text-decoration: none; color: inherit;">
+            <div class="success-amount">฿3.5M</div>
+            <div class="success-label">Funding Secured</div>
+            <h3 class="success-team">Team Zeri</h3>
+            <p class="success-product">Zeri Well Plus</p>
+            <p class="success-desc">DDI students developed their startup through the Sandbox program and secured 3.5 million THB in funding to scale their business.</p>
+            <span class="success-cta">Read Their Story →</span>
+        </a>
+    </section>
+
+    <!-- CHOOSE YOUR PATH - Decision Tree -->
+    <section class="section-light" id="paths">
+        <h2 class="section-title fade-in" style="margin: 16px 0;">CHOOSE YOUR PATH</h2>
+        <p class="subtitle fade-in" style="color: var(--black);">After Year 2 in the Sandbox, you decide your Year 3</p>
+
+        <div class="path-section fade-in">
+            <div class="path-visual">
+                <!-- Root node -->
+                <div class="path-start">
+                    <p class="path-start-title">After Sandbox</p>
+                    <p class="path-start-sub">Year 3 Options</p>
+                </div>
+
+                <!-- Trunk connector -->
+                <div class="path-trunk"></div>
+
+                <!-- Horizontal spread -->
+                <div class="path-spread"></div>
+
+                <!-- Three main branches -->
+                <div class="path-options">
+                    <!-- GO GLOBAL Branch -->
+                    <div class="path-option">
+                        <div class="path-option-line"></div>
+                        <a href="go-global.html" class="path-card">
+                            <span class="path-badge">Study Abroad</span>
+                            <h3 class="path-card-title">Go Global</h3>
+                            <p class="path-card-desc">2+1 years for double or triple degree at partner universities</p>
+                            <span class="path-card-cta">Learn More →</span>
+                        </a>
+                        <div class="path-suboptions">
+                            <a href="go-global.html#northampton" class="path-suboption">Northampton, UK</a>
+                            <a href="go-global.html#bournemouth" class="path-suboption">Bournemouth, UK</a>
+                            <a href="go-global.html#shms" class="path-suboption">SHMS, Switzerland</a>
+                            <a href="go-global.html#essex" class="path-suboption">Essex, UK (Masters)</a>
+                        </div>
+                    </div>
+
+                    <!-- THAILAND TRACKS Branch -->
+                    <div class="path-option">
+                        <div class="path-option-line"></div>
+                        <a href="tracks.html" class="path-card">
+                            <span class="path-badge">Stay in Thailand</span>
+                            <h3 class="path-card-title">Local Tracks</h3>
+                            <p class="path-card-desc">Four flexible pathways to complete your degree in Thailand</p>
+                            <span class="path-card-cta">Learn More →</span>
+                        </a>
+                        <div class="path-suboptions">
+                            <a href="tracks/academic.html" class="path-suboption">Academic Track</a>
+                            <a href="tracks/hybrid.html" class="path-suboption">Hybrid Track</a>
+                            <a href="tracks/internship.html" class="path-suboption">Full Internship</a>
+                            <a href="tracks/entrepreneur.html" class="path-suboption">Entrepreneur Track</a>
+                        </div>
+                    </div>
+
+                    <!-- TRUE ACADEMY Branch -->
+                    <div class="path-option">
+                        <div class="path-option-line"></div>
+                        <a href="programs/true-academy.html" class="path-card">
+                            <span class="path-badge">Industry Partner</span>
+                            <h3 class="path-card-title">True Academy</h3>
+                            <p class="path-card-desc">4-5 month internship at True Corporation with job certification</p>
+                            <span class="path-card-cta">Learn More →</span>
+                        </a>
+                        <div class="path-suboptions">
+                            <a href="programs/true-academy.html#benefits" class="path-suboption">Earn Credits</a>
+                            <a href="programs/true-academy.html#certification" class="path-suboption">Job Certification</a>
+                            <a href="programs/true-academy.html#hiring" class="path-suboption">Priority Hiring</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p class="subtitle fade-in" style="margin-top: 64px; font-size: 14px; opacity: 0.6; color: var(--black);">All paths lead to your BBA degree. Choose the journey that fits your goals.</p>
+    </section>
+
+    <!-- FACULTY -->
+    <section id="faculty" class="section-light">
+        <h2 class="section-title fade-in" style="margin: 16px 0;">FACULTY</h2>
+        <p class="subtitle fade-in" style="margin-top: 24px; color: var(--black);">Learn from academics and industry experts who bring real-world experience to the classroom.</p>
+
+        <div class="faculty-grid stagger">
+            <a href="faculty/natamon.html" class="faculty-card fade-in">
+                <p class="faculty-name">Dr. Natamon Phumpradab</p>
+                <p class="faculty-role">Chairperson</p>
+                <p class="faculty-credential">Ph.D. Business Administration (Marketing)<br>Sasin School of Management</p>
+                <p class="faculty-expertise">Marketing Strategy, Consumer Behavior, Digital Marketing</p>
+                <span class="faculty-cta">View Profile →</span>
+            </a>
+            <a href="faculty/walee.html" class="faculty-card fade-in">
+                <p class="faculty-name">Ms. Walee Thongkhum</p>
+                <p class="faculty-role">Deputy Chair</p>
+                <p class="faculty-credential">M.S. Statistics<br>University of Wollongong, Australia</p>
+                <p class="faculty-expertise">Data Analytics, Research Methods, Business Statistics</p>
+                <span class="faculty-cta">View Profile →</span>
+            </a>
+            <a href="faculty/kittipong.html" class="faculty-card fade-in">
+                <p class="faculty-name">Dr. Kittipong Laosethakul</p>
+                <p class="faculty-role">Instructor</p>
+                <p class="faculty-credential">Ph.D. Management<br>Auburn University, USA</p>
+                <p class="faculty-expertise">Information Systems, Technology Management, Digital Transformation</p>
+                <span class="faculty-cta">View Profile →</span>
+            </a>
+            <a href="faculty/songsak.html" class="faculty-card fade-in">
+                <p class="faculty-name">Dr. Songsak Channarukul</p>
+                <p class="faculty-role">Instructor</p>
+                <p class="faculty-credential">Ph.D. Computer Science<br>UW-Milwaukee, USA</p>
+                <p class="faculty-expertise">Software Development, AI/ML, Computer Systems</p>
+                <span class="faculty-cta">View Profile →</span>
+            </a>
+            <a href="faculty/sirapob.html" class="faculty-card fade-in">
+                <p class="faculty-name">Mr. Sirapob Thangseresuk</p>
+                <p class="faculty-role">Instructor</p>
+                <p class="faculty-credential">M.Arch. Design for Manufacture<br>UCL, United Kingdom</p>
+                <p class="faculty-expertise">Design Thinking, Product Design, Innovation</p>
+                <span class="faculty-cta">View Profile →</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section-light" style="min-height: auto; padding: 100px 24px;">
+        <h2 class="section-title fade-in" style="margin: 24px 0;">START YOUR JOURNEY</h2>
+        <a href="apply.html" class="btn fade-in">Apply Now</a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-logo">DDI</div>
+        <p class="footer-text">Design & Digital Innovation | Assumption University Thailand</p>
+    </footer>
+
+    <!-- Vanta.js for animated background -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.net.min.js"></script>
+
+    <script>
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '-50px' });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Navigation scroll
+        const navHeader = document.querySelector('.nav-header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navHeader.classList.add('scrolled');
+            } else {
+                navHeader.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu
+        const navHamburger = document.querySelector('.nav-hamburger');
+        const navMobile = document.querySelector('.nav-mobile');
+
+        navHamburger.addEventListener('click', () => {
+            navHamburger.classList.toggle('active');
+            navMobile.classList.toggle('active');
+            document.body.style.overflow = navMobile.classList.contains('active') ? 'hidden' : '';
+        });
+
+        navMobile.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navHamburger.classList.remove('active');
+                navMobile.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // VANTA.JS NET BACKGROUND for Sandbox Hero
+        if (typeof VANTA !== 'undefined') {
+            VANTA.NET({
+                el: "#sandbox-hero",
+                mouseControls: true,
+                touchControls: true,
+                gyroControls: false,
+                minHeight: 200.00,
+                minWidth: 200.00,
+                scale: 1.00,
+                scaleMobile: 1.00,
+                color: 0xffffff,
+                backgroundColor: 0x000000,
+                points: 12.00,
+                maxDistance: 20.00,
+                spacing: 18.00,
+                showDots: true
+            });
+        }
+
+        // CONSTELLATION PARTICLES for dark sections
+        function initParticles(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (!section) return;
+
+            const canvas = document.createElement('canvas');
+            canvas.className = 'particles-canvas';
+            section.prepend(canvas);
+            const ctx = canvas.getContext('2d');
+
+            let particles = [];
+            const particleCount = 50;
+
+            function resize() {
+                canvas.width = section.offsetWidth;
+                canvas.height = section.offsetHeight;
+            }
+
+            function createParticles() {
+                particles = [];
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        size: Math.random() * 2 + 1,
+                        speedX: (Math.random() - 0.5) * 0.5,
+                        speedY: (Math.random() - 0.5) * 0.5,
+                        opacity: Math.random() * 0.5 + 0.1
+                    });
+                }
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach(p => {
+                    p.x += p.speedX;
+                    p.y += p.speedY;
+                    if (p.x < 0) p.x = canvas.width;
+                    if (p.x > canvas.width) p.x = 0;
+                    if (p.y < 0) p.y = canvas.height;
+                    if (p.y > canvas.height) p.y = 0;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity})`;
+                    ctx.fill();
+                });
+                requestAnimationFrame(animate);
+            }
+
+            resize();
+            createParticles();
+            animate();
+            window.addEventListener('resize', () => { resize(); createParticles(); });
+        }
+
+        // Initialize particles on both sections
+        initParticles('phases');
+        initParticles('sandbox-success');
+    </script>
+</body>
+</html>

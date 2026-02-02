@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vasupon Thankakan | DDI Industry Mentor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --black: #000000; --white: #ffffff; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; overflow-y: scroll; scrollbar-gutter: stable; }
+        body { font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--white); color: var(--black); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        .back-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(0, 0, 0, 0.95); padding: 16px 24px; }
+        .back-link { color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 14px; font-weight: 500; display: inline-flex; align-items: center; gap: 8px; transition: color 0.3s ease; }
+        .back-link:hover { color: white; }
+        section { padding: 120px 24px; display: flex; flex-direction: column; align-items: center; }
+        .section-dark { background: var(--black); color: var(--white); }
+        .section-light { background: var(--white); color: var(--black); }
+        .hero { padding-top: 160px; text-align: center; }
+        .mentor-label { font-size: 13px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.6; margin-bottom: 16px; }
+        .mentor-name { font-size: clamp(32px, 8vw, 56px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 16px; }
+        .mentor-company { font-size: 20px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.8; margin-bottom: 8px; }
+        .mentor-role { font-size: 16px; opacity: 0.6; }
+        .content-section { max-width: 700px; width: 100%; }
+        .section-label { font-size: 12px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; opacity: 0.5; margin-bottom: 16px; }
+        .section-title { font-size: clamp(28px, 5vw, 40px); font-weight: 700; margin-bottom: 32px; }
+        .content-text { font-size: 16px; line-height: 1.8; opacity: 0.85; margin-bottom: 24px; }
+        .company-highlight { padding: 48px; border: 3px solid currentColor; text-align: center; margin: 32px 0; }
+        .company-name-large { font-size: 32px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px; }
+        .company-desc { font-size: 14px; opacity: 0.7; line-height: 1.6; }
+        .info-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; margin: 32px 0; width: 100%; }
+        .info-label { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.5; margin-bottom: 8px; }
+        .info-value { font-size: 16px; font-weight: 500; line-height: 1.5; }
+        .btn { display: inline-block; padding: 16px 48px; font-size: 13px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; border: 2px solid currentColor; transition: all 0.3s ease; margin: 8px; }
+        .btn-outline { background: transparent; color: var(--black); }
+        .btn-outline:hover { background: var(--black); color: var(--white); }
+        footer { background: var(--black); color: var(--white); padding: 60px 24px; text-align: center; }
+        .footer-logo { font-size: 28px; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 16px; }
+        .footer-text { font-size: 13px; opacity: 0.5; }
+        @media (max-width: 768px) { section { padding: 80px 20px; } .hero { padding-top: 120px; } .info-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <nav class="back-nav"><a href="#" onclick="history.back(); return false;" class="back-link"><span>&larr;</span> Back</a></nav>
+    <section class="hero section-dark">
+        <p class="mentor-label">Industry Mentor</p>
+        <h1 class="mentor-name">Vasupon Thankakan</h1>
+        <p class="mentor-company">Microsoft Thailand</p>
+        <p class="mentor-role">Deputy Managing Director, Marketing & Operations</p>
+    </section>
+    <section class="section-light">
+        <div class="content-section">
+            <p class="section-label">Company</p>
+            <h2 class="section-title">About Microsoft Thailand</h2>
+            <div class="company-highlight">
+                <p class="company-name-large">Microsoft</p>
+                <p class="company-desc">Global technology company providing cloud computing, productivity software, and AI solutions to organizations worldwide.</p>
+            </div>
+            <p class="content-text">Vasupon Thankakan serves as Deputy Managing Director of Marketing & Operations at Microsoft Thailand. He is responsible for Microsoft Azure hyperscale cloud business end-to-end, from strategy to execution across the Thai market. His role involves working with enterprise customers, partners, startups, and technology communities.</p>
+            <p class="content-text">Microsoft Thailand focuses on AI hub development for Thailand and workforce upskilling programs for the AI age. Recent initiatives include responsible AI hackathons in partnership with SCBX and collaboration with government agencies on digital skills development.</p>
+            <p class="content-text">Under his leadership, Microsoft Thailand has launched products including Surface Laptop Studio 2 and expanded cloud adoption among Thai businesses and government organizations.</p>
+        </div>
+    </section>
+    <section class="section-light" style="padding: 80px 24px;">
+        <p class="section-label" style="text-align: center;">Learn More</p>
+        <h2 class="section-title" style="text-align: center;">Meet More Mentors</h2>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-top: 24px;">
+            <a href="../index.html#mentors" class="btn btn-outline">All Mentors</a>
+            <a href="../sandbox.html" class="btn btn-outline">DDI Sandbox</a>
+            <a href="../apply.html" class="btn btn-outline">Apply to DDI</a>
+        </div>
+    </section>
+    <footer><div class="footer-logo">DDI</div><p class="footer-text">Design & Digital Innovation | Assumption University Thailand</p></footer>
+</body>
+</html>

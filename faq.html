@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ | DDI - Design & Digital Innovation</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --black: #000000; --white: #ffffff; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; -webkit-overflow-scrolling: touch; overflow-y: scroll; scrollbar-gutter: stable; }
+        body { font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--white); color: var(--black); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; padding-top: 72px; animation: pageEntrance 1.2s ease-out; }
+        body.menu-open { overflow: hidden; position: fixed; width: 100%; height: 100%; }
+        @keyframes pageEntrance { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Noise Texture */
+        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0.03; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E"); z-index: 9998; }
+
+        /* Navigation */
+        .nav-header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(0, 0, 0, 0.9); padding: 16px 0; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.08); transition: all 0.3s ease; }
+        .nav-header.scrolled { padding: 12px 0; background: rgba(0, 0, 0, 0.95); }
+        .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { color: white; font-size: 24px; font-weight: 700; text-decoration: none; letter-spacing: 0.1em; }
+        .nav-menu { display: flex; gap: 40px; }
+        .nav-link { color: rgba(255, 255, 255, 0.6); text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: 0.05em; transition: color 0.3s ease; position: relative; }
+        .nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: white; transition: width 0.3s ease; }
+        .nav-link:hover, .nav-link.active { color: white; }
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+        .nav-cta { background: white; color: black; padding: 10px 24px; font-size: 12px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; transition: all 0.3s ease; }
+        .nav-cta:hover { background: transparent; color: white; box-shadow: inset 0 0 0 2px white; }
+        .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; z-index: 1001; }
+        .nav-hamburger span { width: 24px; height: 2px; background: white; transition: all 0.3s ease; display: block; }
+        .nav-hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .nav-hamburger.active span:nth-child(2) { opacity: 0; }
+        .nav-hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+        .nav-mobile { display: none; position: fixed; top: 0; right: 0; bottom: 0; width: 100%; max-width: 320px; background: rgba(0, 0, 0, 0.98); z-index: 999; flex-direction: column; align-items: center; justify-content: center; gap: 32px; transform: translateX(100%); pointer-events: none; transition: transform 0.3s ease; }
+        .nav-mobile.active { transform: translateX(0); pointer-events: auto; }
+        .nav-mobile .nav-link { font-size: 24px; font-weight: 600; }
+        .nav-mobile .nav-cta { margin-top: 24px; padding: 14px 32px; font-size: 14px; }
+
+        /* Hero with Vanta.js */
+        .hero { padding: 160px 24px 80px; background: var(--black); color: var(--white); text-align: center; position: relative; overflow: hidden; min-height: 60vh; }
+        .hero > *:not(.vanta-canvas) { position: relative; z-index: 2; }
+
+        /* Mesh Gradient Overlay */
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 80% 50% at 20% 20%, rgba(120, 120, 120, 0.15) 0%, transparent 50%),
+                        radial-gradient(ellipse 60% 40% at 80% 80%, rgba(80, 80, 80, 0.12) 0%, transparent 50%);
+            animation: meshMove 25s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+        @keyframes meshMove {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            33% { transform: scale(1.1) rotate(2deg); }
+            66% { transform: scale(0.95) rotate(-2deg); }
+        }
+
+        /* Scroll indicator line */
+        .scroll-line { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); width: 2px; height: 60px; background: currentColor; animation: pulse 2s ease-in-out infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 0.8; } }
+
+        .hero-label { font-size: 12px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; opacity: 0.5; margin-bottom: 16px; }
+        .hero-title { font-size: clamp(40px, 10vw, 72px); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 16px; position: relative; z-index: 1; }
+        .hero-subtitle { font-size: 18px; opacity: 0.7; max-width: 500px; margin: 0 auto; position: relative; z-index: 1; }
+
+        /* Floating Question Marks */
+        .floating-questions { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+        .q-mark { position: absolute; font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: rgba(255, 255, 255, 0.1); animation: float-spin linear infinite; }
+        @keyframes float-spin {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+            100% { transform: translateY(0) rotate(360deg); }
+        }
+        .q-mark:nth-child(1) { font-size: 80px; left: 10%; top: 20%; animation-duration: 8s; opacity: 0.15; }
+        .q-mark:nth-child(2) { font-size: 50px; left: 80%; top: 30%; animation-duration: 6s; opacity: 0.1; animation-delay: -2s; }
+        .q-mark:nth-child(3) { font-size: 120px; left: 5%; top: 60%; animation-duration: 10s; opacity: 0.08; animation-delay: -4s; }
+        .q-mark:nth-child(4) { font-size: 40px; left: 70%; top: 70%; animation-duration: 7s; opacity: 0.12; animation-delay: -1s; }
+        .q-mark:nth-child(5) { font-size: 90px; left: 90%; top: 15%; animation-duration: 9s; opacity: 0.1; animation-delay: -3s; }
+        .q-mark:nth-child(6) { font-size: 60px; left: 25%; top: 80%; animation-duration: 5s; opacity: 0.15; animation-delay: -5s; }
+        .q-mark:nth-child(7) { font-size: 70px; left: 60%; top: 10%; animation-duration: 11s; opacity: 0.08; }
+        .q-mark:nth-child(8) { font-size: 100px; left: 40%; top: 50%; animation-duration: 12s; opacity: 0.05; animation-delay: -6s; }
+
+        /* FAQ Sections */
+        .faq-container { max-width: 800px; margin: 0 auto; padding: 80px 24px; }
+        .faq-category { margin-bottom: 64px; opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .faq-category.visible { opacity: 1; transform: translateY(0); }
+        .faq-category:nth-child(2) { transition-delay: 0.1s; }
+        .faq-category:nth-child(3) { transition-delay: 0.2s; }
+        .faq-category:nth-child(4) { transition-delay: 0.3s; }
+        .faq-category:nth-child(5) { transition-delay: 0.4s; }
+        .faq-category-title { font-size: 12px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; opacity: 0.4; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid rgba(0,0,0,0.1); display: flex; align-items: center; gap: 12px; }
+        .faq-category-num { font-size: 11px; font-weight: 700; color: var(--white); background: var(--black); padding: 4px 8px; letter-spacing: 0.1em; }
+
+        .faq-item { border-bottom: 1px solid rgba(0,0,0,0.1); transition: transform 0.3s ease, background 0.3s ease; border-radius: 4px; margin: 0 -12px; padding: 0 12px; }
+        .faq-item:hover { transform: translateX(8px); background: rgba(0,0,0,0.02); }
+        .faq-question { padding: 24px 0; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+        .faq-question-text { font-size: 18px; font-weight: 600; }
+        .faq-toggle { font-size: 24px; font-weight: 300; transition: transform 0.3s ease; color: rgba(0,0,0,0.3); }
+        .faq-item.open .faq-toggle { transform: rotate(45deg); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; }
+        .faq-item.open .faq-answer { max-height: 500px; padding-bottom: 24px; }
+        .faq-answer-text { font-size: 16px; line-height: 1.8; opacity: 0.7; }
+
+        /* CTA Section */
+        .cta-section { background: var(--black); color: var(--white); padding: 80px 24px; text-align: center; }
+        .cta-title { font-size: clamp(28px, 5vw, 40px); font-weight: 700; margin-bottom: 32px; }
+        .btn { display: inline-block; padding: 16px 48px; font-size: 13px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; border: 2px solid currentColor; transition: all 0.3s ease; margin: 8px; position: relative; overflow: hidden; }
+        .btn::after { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: left 0.5s ease; }
+        .btn:hover::after { left: 100%; }
+        .btn-white { background: var(--white); color: var(--black); border-color: var(--white); }
+        .btn-white:hover { background: transparent; color: var(--white); transform: translateY(-2px); }
+
+        /* Footer */
+        footer { background: var(--black); color: var(--white); padding: 60px 24px; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); }
+        .footer-logo { font-size: 28px; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 16px; }
+        .footer-text { font-size: 13px; opacity: 0.5; }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            body { padding-top: 64px; }
+            .nav-menu { display: none; }
+            .nav-cta:not(.nav-mobile .nav-cta) { display: none; }
+            .nav-hamburger { display: flex; }
+            .nav-mobile { display: flex; }
+            .hero { padding: 120px 20px 60px; }
+            .faq-container { padding: 60px 20px; }
+            .faq-question-text { font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="nav-header">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">DDI</a>
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="sandbox.html" class="nav-link">Sandbox</a>
+                <a href="faq.html" class="nav-link active">FAQ</a>
+            </nav>
+            <a href="apply.html" class="nav-cta">Apply Now</a>
+            <button class="nav-hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <div class="nav-mobile">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="sandbox.html" class="nav-link">Sandbox</a>
+        <a href="faq.html" class="nav-link active">FAQ</a>
+        <a href="apply.html" class="nav-cta">Apply Now</a>
+    </div>
+
+    <section class="hero" id="faq-hero">
+        <div class="floating-questions">
+            <span class="q-mark">?</span>
+            <span class="q-mark">?</span>
+            <span class="q-mark">?</span>
+            <span class="q-mark">?</span>
+            <span class="q-mark">?</span>
+            <span class="q-mark">?</span>
+            <span class="q-mark">?</span>
+            <span class="q-mark">?</span>
+        </div>
+        <h1 class="hero-title">FAQ</h1>
+        <p class="hero-subtitle">Everything you need to know about the DDI program</p>
+        <div class="scroll-line"></div>
+    </section>
+
+    <!-- Q&A Video -->
+    <section style="background: var(--white); padding: 80px 24px; text-align: center;">
+        <h2 style="font-size: clamp(28px, 5vw, 40px); font-weight: 700; margin-bottom: 48px;">DDI Q&A</h2>
+        <div style="max-width: 800px; margin: 0 auto;">
+            <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" src="https://www.youtube.com/embed/QfoYV41ntPY" title="DDI Q&A" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <div class="faq-container">
+        <!-- About DDI -->
+        <div class="faq-category">
+            <h2 class="faq-category-title"><span class="faq-category-num">01</span> About DDI</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span class="faq-question-text">What is DDI?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p class="faq-answer-text">DDI (Design & Digital Innovation) is a 3-year BBA program at Assumption University Thailand. It combines business education with hands-on entrepreneurship, technology, and design thinking. Students build real companies, receive seed funding, and can earn degrees from international partner universities.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span class="faq-question-text">Is the program taught in English?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p class="faq-answer-text">Yes, DDI is an international program taught entirely in English. This prepares students for global careers and facilitates the international exchange opportunities in Year 3.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span class="faq-question-text">What degree do I receive?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p class="faq-answer-text">You receive a Bachelor of Business Administration (BBA) in Design and Digital Innovation from Assumption University. In Year 3, you can also earn additional degrees from partner universities including Bournemouth (UK), Northampton (UK), Essex (UK), or SHMS (Switzerland).</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span class="faq-question-text">How is DDI different from other business programs?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p class="faq-answer-text">DDI focuses on learning by doing. Instead of just studying case studies, you build actual startups in Year 2 through our Sandbox program, receive real seed funding (฿50,000+), and pitch to industry mentors. Our students have raised over ฿6.6 million in external funding from Ted Fund, Thai Health, and private investors.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admissions -->
+        <div class="faq-category">
+            <h2 class="faq-category-title"><span class="faq-category-num">02</span> Admissions</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span class="faq-question-text">What are the admission requirements?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p class="faq-answer-text">You need a high school diploma (M.6 or equivalent) and English proficiency. We accept various English tests including IELTS, TOEFL, or Assumption University's own English test. We also conduct interviews to assess entrepreneurial mindset and creativity.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span class="faq-question-text">How much is tuition?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p class="faq-answer-text">Total tuition for the 3-year program is approximately ฿900,000. This covers all coursework, Sandbox participation, seed funding for your startup, and access to industry mentors. International Year 3 options have additional costs depending on the partner university.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span class="faq-question-text">Are scholarships available?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p class="faq-answer-text">Yes, Assumption University offers various scholarships based on academic merit and financial need. Contact the admissions office or visit ddi.au.edu for current scholarship opportunities.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span class="faq-question-text">When can I apply?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p class="faq-answer-text">DDI accepts applications year-round with multiple intake periods. The main intake is in August, with a smaller January intake available. Early application is recommended as spaces are limited.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- The Sandbox -->
+        <div class="faq-category">
+            <h2 class="faq-category-title"><span class="faq-category-num">03</span> The Sandbox (Year 2)</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span class="faq-question-text">What is the Sandbox?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p class="faq-answer-text">The Sandbox is DDI's startup incubator program in Year 2. Students form teams, develop business ideas, and build real companies over the course of the year. It's not a simulation - these are actual businesses that can continue after graduation.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span class="faq-question-text">How much seed funding do teams receive?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p class="faq-answer-text">Each team receives ฿50,000 in seed funding to develop their startup. Top-performing teams can access additional funding through competitions and our partner network (Ted Fund, Thai Health Promotion Foundation, etc.).</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span class="faq-question-text">Can I continue my startup after graduation?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p class="faq-answer-text">Absolutely! Many DDI alumni continue building their startups after graduation. Team Zeri raised ฿3.5 million and launched their supplement brand "FEMI". Team Starters founded iReadCustomer with ฿1.5 million in funding. The companies you build are yours to keep.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span class="faq-question-text">What kind of support do startups receive?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p class="faq-answer-text">Beyond seed funding, teams get mentorship from industry leaders at companies like True Corporation, Kasikorn Bank, Microsoft Thailand, and Saha Group. You also get workspace, pitch training, legal guidance on company registration, and connections to investors.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- International Options -->
+        <div class="faq-category">
+            <h2 class="faq-category-title"><span class="faq-category-num">04</span> International Options (Year 3)</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span class="faq-question-text">Can I study abroad?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p class="faq-answer-text">Yes! Year 3 offers multiple international pathways. You can study at partner universities in the UK or Switzerland, earning additional degrees while experiencing global education and cultures.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span class="faq-question-text">What partner universities are available?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p class="faq-answer-text">Our partners include Bournemouth University (UK) - ranked #17 worldwide for hospitality, University of Northampton (UK), University of Essex (UK), and Swiss Hotel Management School (Switzerland) - ranked #3 globally. Each offers unique degree combinations.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span class="faq-question-text">What are Double and Triple Degrees?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p class="faq-answer-text">Double Degree means you earn two bachelor's degrees - one from AU and one from a partner university. Triple Degree (available with SHMS Switzerland) means you earn three degrees in approximately 3.5 years: BBA from AU, BA from a UK university, and a Swiss diploma.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span class="faq-question-text">What if I want to stay in Thailand?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p class="faq-answer-text">You have options! Choose the Full Internship Track (work at partner companies like True Corporation), Entrepreneur Track (continue building your startup), Academic Track (complete your degree at AU), or Hybrid Track (combine internship with coursework).</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Careers -->
+        <div class="faq-category">
+            <h2 class="faq-category-title"><span class="faq-category-num">05</span> Careers</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span class="faq-question-text">What can I do after DDI?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p class="faq-answer-text">DDI graduates pursue diverse paths: founding startups, joining tech companies, working in corporate innovation departments, consulting, digital marketing, product management, UX design, and more. The combination of business, tech, and design skills opens many doors.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span class="faq-question-text">What industry partnerships exist?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p class="faq-answer-text">We partner with True Corporation (True Academy internship program), Kasikorn Bank, Microsoft Thailand, Saha Group, Tourism Authority of Thailand, Digital Economy Promotion Agency (DEPA), Thai Health Promotion Foundation, and Stanford Thailand Research Consortium.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span class="faq-question-text">Are there internship opportunities?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p class="faq-answer-text">Yes! Our flagship internship is True Academy - a 4-5 month program at True Corporation where you work on real projects and receive job certification. Other internship opportunities are available through our partner network.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="cta-section">
+        <h2 class="cta-title">Still have questions?</h2>
+        <a href="https://line.me/R/ti/p/@ddiabac" class="btn btn-white">Chat on LINE</a>
+        <a href="apply.html" class="btn btn-white">Apply Now</a>
+    </section>
+
+    <footer>
+        <div class="footer-logo">DDI</div>
+        <p class="footer-text">Design & Digital Innovation | Assumption University Thailand</p>
+    </footer>
+
+    <!-- Vanta.js for animated background -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.net.min.js"></script>
+
+    <script>
+        // Navigation scroll effect
+        const navHeader = document.querySelector('.nav-header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navHeader.classList.add('scrolled');
+            } else {
+                navHeader.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const navHamburger = document.querySelector('.nav-hamburger');
+        const navMobile = document.querySelector('.nav-mobile');
+
+        navHamburger.addEventListener('click', () => {
+            navHamburger.classList.toggle('active');
+            navMobile.classList.toggle('active');
+            document.body.style.overflow = navMobile.classList.contains('active') ? 'hidden' : '';
+        });
+
+        navMobile.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navHamburger.classList.remove('active');
+                navMobile.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                const wasOpen = item.classList.contains('open');
+
+                // Close all items
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+
+                // Open clicked item if it wasn't already open
+                if (!wasOpen) {
+                    item.classList.add('open');
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '-50px' });
+
+        document.querySelectorAll('.faq-category').forEach(el => observer.observe(el));
+
+        // VANTA.JS NET BACKGROUND for FAQ Hero
+        if (typeof VANTA !== 'undefined') {
+            VANTA.NET({
+                el: "#faq-hero",
+                mouseControls: true,
+                touchControls: true,
+                gyroControls: false,
+                minHeight: 200.00,
+                minWidth: 200.00,
+                scale: 1.00,
+                scaleMobile: 1.00,
+                color: 0xffffff,
+                backgroundColor: 0x000000,
+                points: 12.00,
+                maxDistance: 20.00,
+                spacing: 18.00
+            });
+        }
+    </script>
+</body>
+</html>

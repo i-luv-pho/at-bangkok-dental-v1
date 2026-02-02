@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bournemouth University | DDI Partner University</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --black: #000000; --white: #ffffff; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; overflow-y: scroll; scrollbar-gutter: stable; }
+        body {
+            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .back-nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background: rgba(0, 0, 0, 0.95); padding: 16px 24px;
+        }
+        .back-link {
+            color: rgba(255, 255, 255, 0.7); text-decoration: none;
+            font-size: 14px; font-weight: 500;
+            display: inline-flex; align-items: center; gap: 8px;
+            transition: color 0.3s ease;
+        }
+        .back-link:hover { color: white; }
+
+        section {
+            padding: 120px 24px;
+            display: flex; flex-direction: column; align-items: center;
+        }
+        .section-dark { background: var(--black); color: var(--white); }
+        .section-light { background: var(--white); color: var(--black); }
+
+        .hero { padding-top: 160px; text-align: center; }
+        .country-badge {
+            font-size: 13px; font-weight: 600; letter-spacing: 0.2em;
+            text-transform: uppercase; opacity: 0.6; margin-bottom: 16px;
+        }
+        .school-name {
+            font-size: clamp(36px, 8vw, 64px); font-weight: 700;
+            letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 24px;
+        }
+        .degree-badge {
+            display: inline-block; font-size: 12px; font-weight: 700;
+            letter-spacing: 0.15em; text-transform: uppercase;
+            padding: 12px 24px; border: 2px solid currentColor;
+        }
+
+        .content-section { max-width: 800px; width: 100%; }
+        .section-label {
+            font-size: 12px; font-weight: 700; letter-spacing: 0.25em;
+            text-transform: uppercase; opacity: 0.5; margin-bottom: 16px;
+        }
+        .section-title {
+            font-size: clamp(28px, 5vw, 40px); font-weight: 700; margin-bottom: 32px;
+        }
+        .content-text {
+            font-size: 16px; line-height: 1.8; opacity: 0.85; margin-bottom: 24px;
+        }
+
+        .stats-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 32px; margin: 48px 0; width: 100%; max-width: 700px;
+        }
+        .stat-item { text-align: center; }
+        .stat-value { font-size: 36px; font-weight: 700; line-height: 1; }
+        .stat-label {
+            font-size: 11px; font-weight: 600; letter-spacing: 0.15em;
+            text-transform: uppercase; opacity: 0.6; margin-top: 8px;
+        }
+
+        .info-list { list-style: none; margin: 32px 0; }
+        .info-list li {
+            padding: 16px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .info-list li:first-child { border-top: 1px solid rgba(255, 255, 255, 0.1); }
+        .info-label {
+            font-size: 14px; font-weight: 600; letter-spacing: 0.1em;
+            text-transform: uppercase; opacity: 0.6;
+        }
+        .info-value { font-size: 16px; font-weight: 600; text-align: right; }
+
+        .highlights-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr);
+            gap: 24px; margin: 32px 0; width: 100%;
+        }
+        .highlight-item { padding: 24px; border: 2px solid currentColor; }
+        .highlight-title {
+            font-size: 14px; font-weight: 700; letter-spacing: 0.1em;
+            text-transform: uppercase; margin-bottom: 8px;
+        }
+        .highlight-desc { font-size: 14px; opacity: 0.8; line-height: 1.6; }
+
+        /* AWARD BADGE */
+        .award-section {
+            background: var(--white); color: var(--black);
+            padding: 64px 24px; text-align: center;
+        }
+        .award-badge {
+            display: inline-block; padding: 32px 48px;
+            border: 3px solid var(--black); margin-bottom: 24px;
+        }
+        .award-number { font-size: 64px; font-weight: 700; line-height: 1; }
+        .award-label {
+            font-size: 12px; font-weight: 700; letter-spacing: 0.2em;
+            text-transform: uppercase; margin-top: 8px;
+        }
+        .award-desc { font-size: 14px; opacity: 0.7; max-width: 400px; margin: 0 auto; }
+
+        .btn {
+            display: inline-block; padding: 16px 48px;
+            font-size: 13px; font-weight: 700; letter-spacing: 0.2em;
+            text-transform: uppercase; text-decoration: none;
+            border: 2px solid currentColor; transition: all 0.3s ease; margin: 8px;
+        }
+        .btn-outline { background: transparent; color: var(--black); }
+        .btn-outline:hover { background: var(--black); color: var(--white); }
+
+        footer {
+            background: var(--black); color: var(--white);
+            padding: 60px 24px; text-align: center;
+        }
+        .footer-logo { font-size: 28px; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 16px; }
+        .footer-text { font-size: 13px; opacity: 0.5; }
+
+        @media (max-width: 768px) {
+            section { padding: 80px 20px; }
+            .hero { padding-top: 120px; }
+            .stats-grid { grid-template-columns: 1fr; gap: 24px; }
+            .highlights-grid { grid-template-columns: 1fr; }
+            .info-list li { flex-direction: column; gap: 8px; text-align: left; }
+            .info-value { text-align: left; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="back-nav">
+        <a href="../global.html#universities" class="back-link">
+            <span>&larr;</span> Back to Global Options
+        </a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero section-dark">
+        <p class="country-badge">United Kingdom</p>
+        <h1 class="school-name">Bournemouth University</h1>
+        <span class="degree-badge">Double Degree Program</span>
+    </section>
+
+    <!-- RANKINGS HIGHLIGHT -->
+    <div class="award-section">
+        <div class="award-badge">
+            <div class="award-number">#17</div>
+            <div class="award-label">World Ranking</div>
+        </div>
+        <p class="award-desc">Hospitality & Tourism Management (QS World University Rankings 2024)</p>
+    </div>
+
+    <!-- PROGRAM OVERVIEW -->
+    <section class="section-light">
+        <div class="content-section">
+            <p class="section-label">Program</p>
+            <h2 class="section-title">AACSB-Accredited Excellence</h2>
+            <p class="content-text">
+                Bournemouth University Business School holds AACSB accreditation—a distinction earned by fewer than 6% of business schools worldwide. This globally recognized mark of quality ensures rigorous academic standards and strong industry relevance.
+            </p>
+            <p class="content-text">
+                Complete your third year at Bournemouth and graduate with two degrees: your BBA from Assumption University and a degree from one of the UK's most dynamic young universities.
+            </p>
+        </div>
+    </section>
+
+    <!-- KEY HIGHLIGHTS -->
+    <section class="section-dark">
+        <div class="content-section">
+            <p class="section-label">Why Bournemouth</p>
+            <h2 class="section-title">Key Highlights</h2>
+
+            <div class="highlights-grid">
+                <div class="highlight-item">
+                    <p class="highlight-title">AACSB Accredited</p>
+                    <p class="highlight-desc">Top 6% of business schools globally hold this prestigious accreditation</p>
+                </div>
+                <div class="highlight-item">
+                    <p class="highlight-title">#3 Young University</p>
+                    <p class="highlight-desc">UK's third-best young university (Times Higher Education 2024)</p>
+                </div>
+                <div class="highlight-item">
+                    <p class="highlight-title">Industry Connections</p>
+                    <p class="highlight-desc">Strong employer partnerships and placement support for graduates</p>
+                </div>
+                <div class="highlight-item">
+                    <p class="highlight-title">Coastal Location</p>
+                    <p class="highlight-desc">Study in a vibrant seaside town on England's south coast</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- UNIVERSITY INFO -->
+    <section class="section-light">
+        <div class="content-section">
+            <p class="section-label">About the University</p>
+            <h2 class="section-title">University Profile</h2>
+
+            <p class="content-text">
+                Bournemouth University is a public research university located on the south coast of England. Known for its strong industry links and practical approach to education, BU produces graduates who are ready for immediate workplace contribution.
+            </p>
+
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-value">Top 6%</div>
+                    <div class="stat-label">AACSB Global</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">#79</div>
+                    <div class="stat-label">UK Ranking</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">#3</div>
+                    <div class="stat-label">UK Young Unis</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DETAILS -->
+    <section class="section-dark">
+        <div class="content-section">
+            <p class="section-label">Program Details</p>
+            <h2 class="section-title">At a Glance</h2>
+
+            <ul class="info-list">
+                <li>
+                    <span class="info-label">Duration</span>
+                    <span class="info-value">1 Year (Third Year)</span>
+                </li>
+                <li>
+                    <span class="info-label">Location</span>
+                    <span class="info-value">Bournemouth, England</span>
+                </li>
+                <li>
+                    <span class="info-label">Degrees Awarded</span>
+                    <span class="info-value">BBA (AU) + Degree (Bournemouth)</span>
+                </li>
+                <li>
+                    <span class="info-label">Accreditation</span>
+                    <span class="info-value">AACSB (Top 6% Globally)</span>
+                </li>
+                <li>
+                    <span class="info-label">Language</span>
+                    <span class="info-value">English</span>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section-light" style="padding: 80px 24px;">
+        <p class="section-label" style="text-align: center;">Learn More</p>
+        <h2 class="section-title" style="text-align: center;">Ready to Explore?</h2>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-top: 24px;">
+            <a href="https://www.bournemouth.ac.uk" target="_blank" rel="noopener" class="btn btn-outline">Visit University Website</a>
+            <a href="../global.html#universities" class="btn btn-outline">Back to Global Options</a>
+            <a href="../apply.html" class="btn btn-outline">Apply to DDI</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-logo">DDI</div>
+        <p class="footer-text">Design & Digital Innovation | Assumption University Thailand</p>
+    </footer>
+</body>
+</html>

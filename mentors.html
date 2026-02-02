@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Industry Mentors | DDI - Design & Digital Innovation</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --black: #000000; --white: #ffffff; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; overflow-y: scroll; scrollbar-gutter: stable; }
+        body {
+            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            padding-top: 72px;
+        }
+
+        /* NAVIGATION */
+        .nav-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.95);
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: white;
+            text-decoration: none;
+        }
+        .back-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+        .back-link:hover { color: white; }
+
+        /* HERO */
+        .hero {
+            background: var(--black);
+            color: var(--white);
+            padding: 80px 24px;
+            text-align: center;
+        }
+        .hero-label {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            opacity: 0.5;
+            margin-bottom: 16px;
+        }
+        .hero-title {
+            font-size: clamp(32px, 8vw, 56px);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+        }
+        .hero-subtitle {
+            font-size: 16px;
+            opacity: 0.7;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* MENTOR GRID */
+        .mentors-section {
+            padding: 80px 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .mentor-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .mentor-card {
+            border: 2px solid var(--black);
+            padding: 32px 24px;
+            text-align: center;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .mentor-card::after {
+            content: '→';
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            font-size: 14px;
+            opacity: 0.25;
+            transition: opacity 0.2s ease;
+        }
+        .mentor-card:hover {
+            background: var(--black);
+            color: var(--white);
+            transform: translateY(-4px);
+        }
+        .mentor-card:hover::after {
+            opacity: 0.6;
+        }
+        .mentor-name {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .mentor-company {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            opacity: 0.7;
+            margin-bottom: 4px;
+        }
+        .mentor-role {
+            font-size: 12px;
+            opacity: 0.5;
+        }
+
+        /* CTA */
+        .cta-section {
+            background: var(--black);
+            color: var(--white);
+            padding: 80px 24px;
+            text-align: center;
+        }
+        .cta-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        .cta-text {
+            font-size: 14px;
+            opacity: 0.6;
+            margin-bottom: 32px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 16px 48px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-decoration: none;
+            background: var(--white);
+            color: var(--black);
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(255,255,255,0.2);
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--black);
+            color: var(--white);
+            padding: 40px 24px;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+        }
+        .footer-text {
+            font-size: 12px;
+            opacity: 0.4;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 767px) {
+            .mentor-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+            .mentor-card {
+                padding: 24px 16px;
+            }
+            .mentor-name {
+                font-size: 15px;
+            }
+            .mentor-company {
+                font-size: 11px;
+            }
+        }
+        @media (max-width: 400px) {
+            .mentor-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="nav-header">
+        <a href="index.html" class="nav-logo">DDI</a>
+        <a href="index.html#mentors" class="back-link">← Back</a>
+    </header>
+
+    <section class="hero">
+        <p class="hero-label">Industry Network</p>
+        <h1 class="hero-title">Our Mentors</h1>
+        <p class="hero-subtitle">Learn from founders and executives at Thailand's leading companies</p>
+    </section>
+
+    <section class="mentors-section">
+        <div class="mentor-grid">
+            <a href="mentors/boonkiat.html" class="mentor-card">
+                <p class="mentor-name">Dr. Boonkiat Chokwattana</p>
+                <p class="mentor-company">Saha Group</p>
+                <p class="mentor-role">Executive</p>
+            </a>
+            <a href="mentors/surat.html" class="mentor-card">
+                <p class="mentor-name">Dr. Surat Wongrattanapatsorn</p>
+                <p class="mentor-company">I.C.C. International</p>
+                <p class="mentor-role">VP Information Technology</p>
+            </a>
+            <a href="mentors/kittinut.html" class="mentor-card">
+                <p class="mentor-name">Dr. Kittinut Tikawan</p>
+                <p class="mentor-company">True Corporation</p>
+                <p class="mentor-role">President (Commercial)</p>
+            </a>
+            <a href="mentors/prapon.html" class="mentor-card">
+                <p class="mentor-name">Papon Ratanachaikanont</p>
+                <p class="mentor-company">True Coffee</p>
+                <p class="mentor-role">President, Food Chain</p>
+            </a>
+            <a href="mentors/sangsuk.html" class="mentor-card">
+                <p class="mentor-name">Dr. Sangsuk Pittayanukul</p>
+                <p class="mentor-company">Smooth-E</p>
+                <p class="mentor-role">CEO & Managing Director</p>
+            </a>
+            <a href="mentors/vasupon.html" class="mentor-card">
+                <p class="mentor-name">Vasupon Thankakan</p>
+                <p class="mentor-company">Microsoft Thailand</p>
+                <p class="mentor-role">Deputy Managing Director</p>
+            </a>
+            <a href="mentors/vichate.html" class="mentor-card">
+                <p class="mentor-name">Vichate Tantiwanich</p>
+                <p class="mentor-company">Asia Aviation</p>
+                <p class="mentor-role">Chairman of the Board</p>
+            </a>
+            <a href="mentors/kalaya.html" class="mentor-card">
+                <p class="mentor-name">Kalaya Kovidvisith</p>
+                <p class="mentor-company">FabCafe Bangkok</p>
+                <p class="mentor-role">Co-founder & MD</p>
+            </a>
+            <a href="mentors/kampanat.html" class="mentor-card">
+                <p class="mentor-name">Kampanat Vimolnoht</p>
+                <p class="mentor-company">KX Venture Capital</p>
+                <p class="mentor-role">Managing Director</p>
+            </a>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2 class="cta-title">Ready to learn from the best?</h2>
+        <p class="cta-text">Join DDI and get direct access to industry mentors</p>
+        <a href="apply.html" class="btn">Apply Now</a>
+    </section>
+
+    <footer>
+        <div class="footer-logo">DDI</div>
+        <p class="footer-text">Design & Digital Innovation | Assumption University Thailand</p>
+    </footer>
+</body>
+</html>

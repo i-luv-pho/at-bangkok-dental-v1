@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team MealMate | DDI Success Story</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --black: #000000; --white: #ffffff; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; overflow-y: scroll; scrollbar-gutter: stable; }
+        body { font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--white); color: var(--black); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        .back-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(0, 0, 0, 0.95); padding: 16px 24px; }
+        .back-link { color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 14px; font-weight: 500; display: inline-flex; align-items: center; gap: 8px; transition: color 0.3s ease; }
+        .back-link:hover { color: white; }
+        section { padding: 120px 24px; display: flex; flex-direction: column; align-items: center; }
+        .section-dark { background: var(--black); color: var(--white); }
+        .section-light { background: var(--white); color: var(--black); }
+        .hero { padding-top: 160px; text-align: center; }
+        .success-label { font-size: 13px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.6; margin-bottom: 16px; }
+        .success-name { font-size: clamp(32px, 8vw, 56px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 16px; }
+        .success-company { font-size: 20px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.8; margin-bottom: 8px; }
+        .success-tagline { font-size: 16px; opacity: 0.6; }
+        .content-section { max-width: 700px; width: 100%; }
+        .section-label { font-size: 12px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; opacity: 0.5; margin-bottom: 16px; }
+        .section-title { font-size: clamp(28px, 5vw, 40px); font-weight: 700; margin-bottom: 32px; }
+        .content-text { font-size: 16px; line-height: 1.8; opacity: 0.85; margin-bottom: 24px; }
+        .funding-highlight { padding: 48px; border: 3px solid currentColor; text-align: center; margin: 32px 0; }
+        .funding-amount { font-size: 48px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
+        .funding-label { font-size: 14px; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.1em; }
+        .team-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin: 32px 0; width: 100%; }
+        .team-member { padding: 24px; border: 2px solid rgba(255,255,255,0.2); text-align: center; }
+        .team-name { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+        .team-nickname { font-size: 13px; opacity: 0.5; }
+        .info-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; margin: 32px 0; width: 100%; }
+        .info-label { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.5; margin-bottom: 8px; }
+        .info-value { font-size: 16px; font-weight: 500; line-height: 1.5; }
+        .btn { display: inline-block; padding: 16px 48px; font-size: 13px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; border: 2px solid currentColor; transition: all 0.3s ease; margin: 8px; }
+        .btn-outline { background: transparent; color: var(--black); }
+        .btn-outline:hover { background: var(--black); color: var(--white); }
+        footer { background: var(--black); color: var(--white); padding: 60px 24px; text-align: center; }
+        .footer-logo { font-size: 28px; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 16px; }
+        .footer-text { font-size: 13px; opacity: 0.5; }
+        @media (max-width: 768px) { section { padding: 80px 20px; } .hero { padding-top: 120px; } .info-grid, .team-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <nav class="back-nav"><a href="../awards.html" class="back-link"><span>&larr;</span> Back to Awards</a></nav>
+    <section class="hero section-dark">
+        <p class="success-label">DDI Success Story</p>
+        <h1 class="success-name">Team MealMate</h1>
+        <p class="success-company">Food Tech Innovation</p>
+        <p class="success-tagline">DDI Year 2 - Elderly Care Solution</p>
+    </section>
+    <section class="section-light">
+        <div class="content-section">
+            <p class="section-label">The Innovation</p>
+            <h2 class="section-title">Appetite Enhancement for the Elderly</h2>
+            <div class="funding-highlight">
+                <p class="funding-amount">฿100K</p>
+                <p class="funding-label">TED Fund Ideation Award</p>
+            </div>
+            <p class="content-text">Team MealMate, second-year DDI students from MSME ABAC, won 100,000 baht from the TED Fund Ideation for their innovative supplement drink designed to boost appetite in the elderly.</p>
+            <p class="content-text">Using natural herbs, MealMate enhances taste perception, aids swallowing, and improves digestion - addressing a critical health challenge facing Thailand's aging population. The solution combines traditional knowledge of Thai herbs with modern food technology.</p>
+        </div>
+    </section>
+    <section class="section-dark">
+        <div class="content-section">
+            <p class="section-label">The Team</p>
+            <h2 class="section-title">Meet MealMate</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <p class="team-name">Harinya Thongmunee</p>
+                    <p class="team-nickname">Vill</p>
+                </div>
+                <div class="team-member">
+                    <p class="team-name">Suvanan Lertnamchao</p>
+                    <p class="team-nickname">Smile</p>
+                </div>
+                <div class="team-member">
+                    <p class="team-name">Pichanun Seangathidcharoen</p>
+                    <p class="team-nickname">Aom</p>
+                </div>
+                <div class="team-member">
+                    <p class="team-name">Nonthapatr Phinyocheep</p>
+                    <p class="team-nickname">Boss</p>
+                </div>
+            </div>
+            <div class="info-grid" style="margin-top: 48px;">
+                <div>
+                    <p class="info-label">Advisor</p>
+                    <p class="info-value">Dr. Kittipong Laosethaku (A.Nock)</p>
+                </div>
+                <div>
+                    <p class="info-label">Category</p>
+                    <p class="info-value">Food Tech / Elderly Care</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section-light" style="padding: 80px 24px;">
+        <p class="section-label" style="text-align: center;">More Stories</p>
+        <h2 class="section-title" style="text-align: center;">Other Success Stories</h2>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-top: 24px;">
+            <a href="zeri.html" class="btn btn-outline">Team Zeri</a>
+            <a href="zensation.html" class="btn btn-outline">Team Zensation</a>
+            <a href="../awards.html" class="btn btn-outline">All Awards</a>
+        </div>
+    </section>
+    <footer><div class="footer-logo">DDI</div><p class="footer-text">Design & Digital Innovation | Assumption University Thailand</p></footer>
+</body>
+</html>

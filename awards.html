@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awards & Achievements | DDI - Design & Digital Innovation</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --black: #000000; --white: #ffffff; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; overflow-y: scroll; scrollbar-gutter: stable; }
+        body { font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--white); color: var(--black); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Navigation */
+        .nav-header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(0, 0, 0, 0.95); padding: 16px 24px; backdrop-filter: blur(10px); }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { color: white; font-size: 24px; font-weight: 700; text-decoration: none; letter-spacing: 0.1em; }
+        .nav-menu { display: flex; gap: 40px; }
+        .nav-link { color: rgba(255, 255, 255, 0.6); text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: 0.05em; transition: color 0.3s ease; }
+        .nav-link:hover, .nav-link.active { color: white; }
+        .nav-cta { background: white; color: black; padding: 10px 24px; font-size: 12px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; transition: all 0.3s ease; }
+        .nav-cta:hover { background: transparent; color: white; outline: 1px solid white; }
+
+        /* Hero */
+        .hero { padding: 160px 24px 80px; background: var(--black); color: var(--white); text-align: center; }
+        .hero-label { font-size: 12px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; opacity: 0.5; margin-bottom: 16px; }
+        .hero-title { font-size: clamp(40px, 10vw, 72px); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 24px; }
+        .hero-stat { display: flex; justify-content: center; gap: 48px; margin-top: 48px; flex-wrap: wrap; }
+        .stat-item { text-align: center; }
+        .stat-number { font-size: clamp(48px, 12vw, 80px); font-weight: 700; letter-spacing: -0.02em; line-height: 1; }
+        .stat-label { font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.5; margin-top: 8px; }
+
+        /* Awards Grid */
+        .awards-section { padding: 80px 24px; max-width: 1000px; margin: 0 auto; }
+        .section-label { font-size: 12px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; opacity: 0.4; margin-bottom: 16px; }
+        .section-title { font-size: clamp(28px, 5vw, 40px); font-weight: 700; margin-bottom: 48px; }
+
+        .award-card { border: 3px solid var(--black); padding: 48px; margin-bottom: 32px; display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: start; transition: all 0.3s ease; position: relative; }
+        .award-card::after { content: '→'; position: absolute; bottom: 16px; right: 16px; font-size: 16px; opacity: 0.2; transition: opacity 0.2s ease; }
+        .award-card:hover { background: var(--black); color: var(--white); transform: translateY(-4px); }
+        .award-card:hover::after { opacity: 0.6; }
+        .award-team { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.5; margin-bottom: 8px; }
+        .award-title { font-size: 24px; font-weight: 700; margin-bottom: 16px; }
+        .award-desc { font-size: 16px; line-height: 1.7; opacity: 0.8; margin-bottom: 16px; }
+        .award-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+        .award-tag { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 6px 12px; border: 1px solid currentColor; opacity: 0.6; }
+        .award-amount { text-align: right; }
+        .award-number { font-size: clamp(32px, 8vw, 48px); font-weight: 700; letter-spacing: -0.02em; line-height: 1; }
+        .award-currency { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.5; margin-top: 4px; }
+
+        /* Timeline */
+        .timeline-section { background: var(--black); color: var(--white); padding: 80px 24px; }
+        .timeline { max-width: 800px; margin: 0 auto; }
+        .timeline-year { font-size: 14px; font-weight: 700; letter-spacing: 0.2em; opacity: 0.4; margin-bottom: 24px; margin-top: 48px; }
+        .timeline-year:first-child { margin-top: 0; }
+        .timeline-item { padding: 24px 0; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+        .timeline-event { font-size: 18px; font-weight: 500; }
+        .timeline-team { font-size: 13px; opacity: 0.5; margin-top: 4px; }
+        .timeline-value { font-size: 18px; font-weight: 700; text-align: right; white-space: nowrap; }
+
+        /* CTA */
+        .cta-section { padding: 80px 24px; text-align: center; }
+        .cta-title { font-size: clamp(28px, 5vw, 40px); font-weight: 700; margin-bottom: 32px; }
+        .btn { display: inline-block; padding: 16px 48px; font-size: 13px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; border: 2px solid currentColor; transition: all 0.3s ease; margin: 8px; background: var(--black); color: var(--white); }
+        .btn:hover { background: transparent; color: var(--black); }
+
+        /* Footer */
+        footer { background: var(--black); color: var(--white); padding: 60px 24px; text-align: center; }
+        .footer-logo { font-size: 28px; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 16px; }
+        .footer-text { font-size: 13px; opacity: 0.5; }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+            .hero { padding: 120px 20px 60px; }
+            .hero-stat { gap: 32px; }
+            .award-card { grid-template-columns: 1fr; text-align: center; }
+            .award-amount { text-align: center; margin-top: 16px; }
+            .timeline-item { flex-direction: column; text-align: center; gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="nav-header">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">DDI</a>
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="sandbox.html" class="nav-link">Sandbox</a>
+                <a href="faq.html" class="nav-link">FAQ</a>
+            </nav>
+            <a href="apply.html" class="nav-cta">Apply</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <p class="hero-label">DDI Student Achievements</p>
+        <h1 class="hero-title">Awards</h1>
+        <div class="hero-stat">
+            <div class="stat-item">
+                <p class="stat-number">6.6M+</p>
+                <p class="stat-label">Total Funding Raised</p>
+            </div>
+            <div class="stat-item">
+                <p class="stat-number">5+</p>
+                <p class="stat-label">Award-Winning Teams</p>
+            </div>
+            <div class="stat-item">
+                <p class="stat-number">10+</p>
+                <p class="stat-label">Competition Wins</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="awards-section">
+        <p class="section-label">Featured Success Stories</p>
+        <h2 class="section-title">Our Award Winners</h2>
+
+        <!-- Zeri -->
+        <a href="success/zeri.html" class="award-card" style="text-decoration: none; color: inherit;">
+            <div class="award-content">
+                <p class="award-team">DDI Batch 1</p>
+                <h3 class="award-title">Team Zeri - Zeri Well Plus Co., Ltd.</h3>
+                <p class="award-desc">First DDI team to fully pursue their startup dream. Founded Zeri Well Plus and launched "FEMI" - hormone-balancing supplements made from natural Thai herbs. Secured funding from TED Fund, Thai Health Promotion Foundation, and Special Innovation.</p>
+                <div class="award-tags">
+                    <span class="award-tag">Health Tech</span>
+                    <span class="award-tag">TED Fund</span>
+                    <span class="award-tag">Thai Health</span>
+                </div>
+            </div>
+            <div class="award-amount">
+                <p class="award-number">3.5M</p>
+                <p class="award-currency">THB Raised</p>
+            </div>
+        </a>
+
+        <!-- Starters / iReadCustomer -->
+        <a href="success/starters.html" class="award-card" style="text-decoration: none; color: inherit;">
+            <div class="award-content">
+                <p class="award-team">DDI Batch 2</p>
+                <h3 class="award-title">Team Starters - iReadCustomer</h3>
+                <p class="award-desc">DataTech startup transforming market research with Agentic AI. Turns "voice of the customer" into deep, actionable insights faster than traditional methods. Founded by Naruebet (Leo) and Zurapatsawee (Jump).</p>
+                <div class="award-tags">
+                    <span class="award-tag">DataTech</span>
+                    <span class="award-tag">TED Fund</span>
+                    <span class="award-tag">AI/ML</span>
+                </div>
+            </div>
+            <div class="award-amount">
+                <p class="award-number">1.5M</p>
+                <p class="award-currency">THB Raised</p>
+            </div>
+        </a>
+
+        <!-- DOTS -->
+        <a href="success/dots.html" class="award-card" style="text-decoration: none; color: inherit;">
+            <div class="award-content">
+                <p class="award-team">DDI Batch 2</p>
+                <h3 class="award-title">DOTSX Enterprise</h3>
+                <p class="award-desc">Health innovation team that secured R&D funding through HealthTech X 2 project. Advancing health technology solutions from academic concepts to market-ready products.</p>
+                <div class="award-tags">
+                    <span class="award-tag">Health Tech</span>
+                    <span class="award-tag">HealthTech X</span>
+                    <span class="award-tag">R&D</span>
+                </div>
+            </div>
+            <div class="award-amount">
+                <p class="award-number">500K</p>
+                <p class="award-currency">THB Funding</p>
+            </div>
+        </a>
+
+        <!-- Zensation -->
+        <a href="success/zensation.html" class="award-card" style="text-decoration: none; color: inherit;">
+            <div class="award-content">
+                <p class="award-team">DDI Students</p>
+                <h3 class="award-title">Team Zensation</h3>
+                <p class="award-desc">Winner of TEDFund Peaching 2025 (University Category). Created a lightweight transparent makeup product specifically designed for acne-prone skin. Showcased at Vitafoods Asia 2025.</p>
+                <div class="award-tags">
+                    <span class="award-tag">Beauty Tech</span>
+                    <span class="award-tag">1st Place</span>
+                    <span class="award-tag">TEDFund Peaching</span>
+                </div>
+            </div>
+            <div class="award-amount">
+                <p class="award-number">1st</p>
+                <p class="award-currency">Place Winner</p>
+            </div>
+        </a>
+
+        <!-- MealMate -->
+        <a href="success/mealmate.html" class="award-card" style="text-decoration: none; color: inherit;">
+            <div class="award-content">
+                <p class="award-team">DDI Year 2</p>
+                <h3 class="award-title">Team MealMate</h3>
+                <p class="award-desc">Innovative supplement drink to boost appetite in the elderly using natural herbs. Enhances taste, aids swallowing, and improves digestion. Team members: Harinya (Vill), Suvanan (Smile), Pichanun (Aom), Nonthapatr (Boss).</p>
+                <div class="award-tags">
+                    <span class="award-tag">Food Tech</span>
+                    <span class="award-tag">TED Fund Ideation</span>
+                    <span class="award-tag">Elderly Care</span>
+                </div>
+            </div>
+            <div class="award-amount">
+                <p class="award-number">100K</p>
+                <p class="award-currency">THB Won</p>
+            </div>
+        </a>
+    </section>
+
+    <section class="timeline-section">
+        <div class="timeline">
+            <p class="section-label" style="color: var(--white);">Achievement Timeline</p>
+            <h2 class="section-title">Our Journey</h2>
+
+            <p class="timeline-year">2025</p>
+            <div class="timeline-item">
+                <div>
+                    <p class="timeline-event">TEDFund Peaching 2025 - 1st Place</p>
+                    <p class="timeline-team">Team Zensation</p>
+                </div>
+                <p class="timeline-value">Winner</p>
+            </div>
+            <div class="timeline-item">
+                <div>
+                    <p class="timeline-event">Vitafoods Asia 2025 Exhibition</p>
+                    <p class="timeline-team">Zeri & Zensation</p>
+                </div>
+                <p class="timeline-value">Showcase</p>
+            </div>
+            <div class="timeline-item">
+                <div>
+                    <p class="timeline-event">HealthTech X 2 R&D Funding</p>
+                    <p class="timeline-team">DOTSX Enterprise</p>
+                </div>
+                <p class="timeline-value">฿500,000</p>
+            </div>
+            <div class="timeline-item">
+                <div>
+                    <p class="timeline-event">TED Fund Ideation Award</p>
+                    <p class="timeline-team">Team MealMate</p>
+                </div>
+                <p class="timeline-value">฿100,000</p>
+            </div>
+
+            <p class="timeline-year">2024</p>
+            <div class="timeline-item">
+                <div>
+                    <p class="timeline-event">Special Innovation Partnership</p>
+                    <p class="timeline-team">Team Zeri</p>
+                </div>
+                <p class="timeline-value">฿2,000,000</p>
+            </div>
+            <div class="timeline-item">
+                <div>
+                    <p class="timeline-event">TED Fund - iReadCustomer</p>
+                    <p class="timeline-team">Team Starters</p>
+                </div>
+                <p class="timeline-value">฿1,500,000</p>
+            </div>
+
+            <p class="timeline-year">2023</p>
+            <div class="timeline-item">
+                <div>
+                    <p class="timeline-event">Thai Health Promotion Foundation</p>
+                    <p class="timeline-team">Team Zeri</p>
+                </div>
+                <p class="timeline-value">฿500,000</p>
+            </div>
+            <div class="timeline-item">
+                <div>
+                    <p class="timeline-event">PM Health Innovation Award Finals</p>
+                    <p class="timeline-team">Dots Connect & FitQuest</p>
+                </div>
+                <p class="timeline-value">฿70,000 each</p>
+            </div>
+            <div class="timeline-item">
+                <div>
+                    <p class="timeline-event">HACKaTHAILAND 2023 - 5th Place</p>
+                    <p class="timeline-team">Digital Infinity</p>
+                </div>
+                <p class="timeline-value">฿2,500</p>
+            </div>
+            <div class="timeline-item">
+                <div>
+                    <p class="timeline-event">YouthFul Issue - Best Sustainable Solution</p>
+                    <p class="timeline-team">Eco-Start App</p>
+                </div>
+                <p class="timeline-value">฿5,000</p>
+            </div>
+            <div class="timeline-item">
+                <div>
+                    <p class="timeline-event">TED Fund Initial Grant</p>
+                    <p class="timeline-team">Team Zeri</p>
+                </div>
+                <p class="timeline-value">฿1,000,000</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2 class="cta-title">Build Something That Matters</h2>
+        <p style="opacity: 0.6; margin-bottom: 32px; max-width: 500px; margin-left: auto; margin-right: auto;">Join DDI and get the resources, mentorship, and funding to turn your ideas into award-winning startups.</p>
+        <a href="sandbox.html" class="btn">Learn About Sandbox</a>
+        <a href="apply.html" class="btn">Apply Now</a>
+    </section>
+
+    <footer>
+        <div class="footer-logo">DDI</div>
+        <p class="footer-text">Design & Digital Innovation | Assumption University Thailand</p>
+    </footer>
+</body>
+</html>

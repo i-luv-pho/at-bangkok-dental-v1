@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Individual Development | DDI Four Pillars</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --black: #000000; --white: #ffffff; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; overflow-y: scroll; scrollbar-gutter: stable; }
+        body { font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--white); color: var(--black); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        .back-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(0, 0, 0, 0.95); padding: 16px 24px; }
+        .back-link { color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 14px; font-weight: 500; display: inline-flex; align-items: center; gap: 8px; transition: color 0.3s ease; }
+        .back-link:hover { color: white; }
+        section { padding: 120px 24px; display: flex; flex-direction: column; align-items: center; }
+        .section-dark { background: var(--black); color: var(--white); }
+        .section-light { background: var(--white); color: var(--black); }
+        .hero { padding-top: 160px; text-align: center; }
+        .pillar-label { font-size: 13px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.6; margin-bottom: 16px; }
+        .pillar-title { font-size: clamp(40px, 10vw, 72px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.0; margin-bottom: 24px; }
+        .pillar-subtitle { font-size: 18px; opacity: 0.7; max-width: 500px; }
+        .content-section { max-width: 700px; width: 100%; }
+        .section-label { font-size: 12px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; opacity: 0.5; margin-bottom: 16px; }
+        .section-title { font-size: clamp(28px, 5vw, 40px); font-weight: 700; margin-bottom: 32px; }
+        .content-text { font-size: 16px; line-height: 1.8; opacity: 0.85; margin-bottom: 24px; }
+        .philosophy-block { padding: 48px; border: 3px solid currentColor; margin: 48px 0; }
+        .philosophy-title { font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.6; margin-bottom: 16px; }
+        .philosophy-text { font-size: 20px; font-weight: 500; line-height: 1.6; }
+        .principles { margin: 48px 0; }
+        .principle { padding: 24px 0; border-bottom: 1px solid rgba(0,0,0,0.1); }
+        .principle:first-child { border-top: 1px solid rgba(0,0,0,0.1); }
+        .principle-number { font-size: 12px; font-weight: 700; letter-spacing: 0.2em; opacity: 0.4; margin-bottom: 8px; }
+        .principle-title { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+        .principle-desc { font-size: 14px; opacity: 0.7; line-height: 1.6; }
+        .btn { display: inline-block; padding: 16px 48px; font-size: 13px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; border: 2px solid currentColor; transition: all 0.3s ease; margin: 8px; }
+        .btn-outline { background: transparent; color: var(--black); }
+        .btn-outline:hover { background: var(--black); color: var(--white); }
+        footer { background: var(--black); color: var(--white); padding: 60px 24px; text-align: center; }
+        .footer-logo { font-size: 28px; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 16px; }
+        .footer-text { font-size: 13px; opacity: 0.5; }
+        @media (max-width: 768px) { section { padding: 80px 20px; } .hero { padding-top: 120px; } .philosophy-block { padding: 32px 24px; } }
+        @media (max-width: 375px) { section { padding: 60px 16px; } .pillar-title { font-size: clamp(32px, 12vw, 56px); } }
+    </style>
+</head>
+<body>
+    <nav class="back-nav"><a href="#" onclick="history.back(); return false;" class="back-link"><span>&larr;</span> Back</a></nav>
+    <section class="hero section-dark">
+        <p class="pillar-label">DDI Pillar</p>
+        <h1 class="pillar-title">Individual Development</h1>
+        <p class="pillar-subtitle">Building the habits, mindsets, and capabilities that compound over a career</p>
+    </section>
+    <section class="section-light">
+        <div class="content-section">
+            <p class="section-label">Philosophy</p>
+            <h2 class="section-title">The DDI Approach to Individual Growth</h2>
+            <p class="content-text">Skills can be taught. Character must be developed. DDI recognizes that long-term success depends more on personal qualities than technical abilities. These qualities can be cultivated through deliberate practice and reflection.</p>
+            <p class="content-text">The program creates situations that require students to operate outside their comfort zones. Growth happens at the edge of capability, not within the familiar. Structured discomfort builds adaptability.</p>
+            <div class="philosophy-block">
+                <p class="philosophy-title">Core Belief</p>
+                <p class="philosophy-text">The person you become matters more than the skills you acquire. Habits, mindsets, and relationships compound. Invest in yourself as seriously as you invest in your work.</p>
+            </div>
+            <p class="content-text">Students develop self-awareness through regular reflection. Understanding your own patterns of thinking, working, and relating to others enables intentional growth. This metacognitive capacity transfers across all domains.</p>
+        </div>
+    </section>
+    <section class="section-light" style="padding-top: 0;">
+        <div class="content-section">
+            <p class="section-label">Methodology</p>
+            <h2 class="section-title">How We Develop Individuals</h2>
+            <div class="principles">
+                <div class="principle">
+                    <p class="principle-number">01</p>
+                    <p class="principle-title">Ownership and Accountability</p>
+                    <p class="principle-desc">Students are responsible for outcomes, not just effort. This means making commitments and being held to them. Taking ownership of results, including failures, develops professional maturity.</p>
+                </div>
+                <div class="principle">
+                    <p class="principle-number">02</p>
+                    <p class="principle-title">Communication as Core Skill</p>
+                    <p class="principle-desc">Ideas without communication have no impact. DDI emphasizes writing, presenting, and negotiating. Students practice articulating complex ideas clearly to diverse audiences.</p>
+                </div>
+                <div class="principle">
+                    <p class="principle-number">03</p>
+                    <p class="principle-title">Network Building</p>
+                    <p class="principle-desc">Relationships open doors that credentials cannot. Students connect with mentors, industry practitioners, and peers across cohorts. Building genuine professional relationships is a skill that improves with practice.</p>
+                </div>
+                <div class="principle">
+                    <p class="principle-number">04</p>
+                    <p class="principle-title">Resilience Through Challenge</p>
+                    <p class="principle-desc">Setbacks are features, not bugs. The program includes difficult experiences by design. Learning to persist through frustration, recover from failure, and maintain motivation builds durable capability.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section-light" style="padding: 80px 24px;">
+        <p class="section-label" style="text-align: center;">Explore More</p>
+        <h2 class="section-title" style="text-align: center;">Other Pillars</h2>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-top: 24px;">
+            <a href="business.html" class="btn btn-outline">Business</a>
+            <a href="technology.html" class="btn btn-outline">Technology</a>
+            <a href="design.html" class="btn btn-outline">Design</a>
+            <a href="../index.html#pillars" class="btn btn-outline">All Pillars</a>
+        </div>
+    </section>
+    <footer><div class="footer-logo">DDI</div><p class="footer-text">Design & Digital Innovation | Assumption University Thailand</p></footer>
+</body>
+</html>

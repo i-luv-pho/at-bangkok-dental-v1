@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University of Essex | DDI Partner University</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --black: #000000; --white: #ffffff; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; overflow-y: scroll; scrollbar-gutter: stable; }
+        body {
+            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .back-nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background: rgba(0, 0, 0, 0.95); padding: 16px 24px;
+        }
+        .back-link {
+            color: rgba(255, 255, 255, 0.7); text-decoration: none;
+            font-size: 14px; font-weight: 500;
+            display: inline-flex; align-items: center; gap: 8px;
+            transition: color 0.3s ease;
+        }
+        .back-link:hover { color: white; }
+
+        section {
+            padding: 120px 24px;
+            display: flex; flex-direction: column; align-items: center;
+        }
+        .section-dark { background: var(--black); color: var(--white); }
+        .section-light { background: var(--white); color: var(--black); }
+
+        .hero { padding-top: 160px; text-align: center; }
+        .country-badge {
+            font-size: 13px; font-weight: 600; letter-spacing: 0.2em;
+            text-transform: uppercase; opacity: 0.6; margin-bottom: 16px;
+        }
+        .school-name {
+            font-size: clamp(36px, 8vw, 64px); font-weight: 700;
+            letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 24px;
+        }
+        .degree-badge {
+            display: inline-block; font-size: 12px; font-weight: 700;
+            letter-spacing: 0.15em; text-transform: uppercase;
+            padding: 12px 24px; border: 2px solid currentColor;
+        }
+
+        .content-section { max-width: 800px; width: 100%; }
+        .section-label {
+            font-size: 12px; font-weight: 700; letter-spacing: 0.25em;
+            text-transform: uppercase; opacity: 0.5; margin-bottom: 16px;
+        }
+        .section-title {
+            font-size: clamp(28px, 5vw, 40px); font-weight: 700; margin-bottom: 32px;
+        }
+        .content-text {
+            font-size: 16px; line-height: 1.8; opacity: 0.85; margin-bottom: 24px;
+        }
+
+        .stats-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 32px; margin: 48px 0; width: 100%; max-width: 700px;
+        }
+        .stat-item { text-align: center; }
+        .stat-value { font-size: 36px; font-weight: 700; line-height: 1; }
+        .stat-label {
+            font-size: 11px; font-weight: 600; letter-spacing: 0.15em;
+            text-transform: uppercase; opacity: 0.6; margin-top: 8px;
+        }
+
+        .info-list { list-style: none; margin: 32px 0; }
+        .info-list li {
+            padding: 16px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .info-list li:first-child { border-top: 1px solid rgba(255, 255, 255, 0.1); }
+        .info-label {
+            font-size: 14px; font-weight: 600; letter-spacing: 0.1em;
+            text-transform: uppercase; opacity: 0.6;
+        }
+        .info-value { font-size: 16px; font-weight: 600; text-align: right; }
+
+        .highlights-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr);
+            gap: 24px; margin: 32px 0; width: 100%;
+        }
+        .highlight-item { padding: 24px; border: 2px solid currentColor; }
+        .highlight-title {
+            font-size: 14px; font-weight: 700; letter-spacing: 0.1em;
+            text-transform: uppercase; margin-bottom: 8px;
+        }
+        .highlight-desc { font-size: 14px; opacity: 0.8; line-height: 1.6; }
+
+        /* TIME SAVINGS HIGHLIGHT */
+        .savings-section {
+            background: var(--white); color: var(--black);
+            padding: 80px 24px; text-align: center;
+        }
+        .savings-comparison {
+            display: flex; justify-content: center; align-items: center;
+            gap: 32px; flex-wrap: wrap; margin: 32px 0;
+        }
+        .savings-item {
+            padding: 32px 40px; border: 2px solid var(--black);
+            min-width: 180px;
+        }
+        .savings-item.highlight {
+            background: var(--black); color: var(--white);
+        }
+        .savings-years { font-size: 64px; font-weight: 700; line-height: 1; }
+        .savings-label {
+            font-size: 11px; font-weight: 700; letter-spacing: 0.15em;
+            text-transform: uppercase; margin-top: 8px; opacity: 0.7;
+        }
+        .savings-arrow { font-size: 32px; opacity: 0.3; }
+        .savings-note {
+            font-size: 14px; opacity: 0.7; max-width: 500px; margin: 0 auto;
+        }
+
+        .btn {
+            display: inline-block; padding: 16px 48px;
+            font-size: 13px; font-weight: 700; letter-spacing: 0.2em;
+            text-transform: uppercase; text-decoration: none;
+            border: 2px solid currentColor; transition: all 0.3s ease; margin: 8px;
+        }
+        .btn-outline { background: transparent; color: var(--black); }
+        .btn-outline:hover { background: var(--black); color: var(--white); }
+
+        footer {
+            background: var(--black); color: var(--white);
+            padding: 60px 24px; text-align: center;
+        }
+        .footer-logo { font-size: 28px; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 16px; }
+        .footer-text { font-size: 13px; opacity: 0.5; }
+
+        @media (max-width: 768px) {
+            section { padding: 80px 20px; }
+            .hero { padding-top: 120px; }
+            .stats-grid { grid-template-columns: 1fr; gap: 24px; }
+            .highlights-grid { grid-template-columns: 1fr; }
+            .savings-comparison { flex-direction: column; }
+            .savings-arrow { transform: rotate(90deg); }
+            .info-list li { flex-direction: column; gap: 8px; text-align: left; }
+            .info-value { text-align: left; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="back-nav">
+        <a href="../global.html#universities" class="back-link">
+            <span>&larr;</span> Back to Global Options
+        </a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero section-dark">
+        <p class="country-badge">United Kingdom</p>
+        <h1 class="school-name">University of Essex</h1>
+        <span class="degree-badge">Bachelor's + Master's Pathway</span>
+    </section>
+
+    <!-- TIME SAVINGS -->
+    <div class="savings-section">
+        <p class="section-label">Accelerated Pathway</p>
+        <h2 class="section-title">Save 1-2 Years</h2>
+
+        <div class="savings-comparison">
+            <div class="savings-item">
+                <div class="savings-years">5+</div>
+                <div class="savings-label">Traditional Path</div>
+            </div>
+            <div class="savings-arrow">→</div>
+            <div class="savings-item highlight">
+                <div class="savings-years">4</div>
+                <div class="savings-label">DDI + Essex</div>
+            </div>
+        </div>
+
+        <p class="savings-note">Complete both your Bachelor's and Master's degrees in just 4 years instead of the traditional 5+ year pathway.</p>
+    </div>
+
+    <!-- PROGRAM OVERVIEW -->
+    <section class="section-light">
+        <div class="content-section">
+            <p class="section-label">Program</p>
+            <h2 class="section-title">Bachelor's to Master's</h2>
+            <p class="content-text">
+                This unique pathway allows DDI students to progress directly from their BBA to a Master's degree at the University of Essex. Complete your Bachelor's at Assumption University (3 years), then earn your Master's at Essex (1 year).
+            </p>
+            <p class="content-text">
+                The University of Essex is ranked among the UK's top 30 universities and its Business School is recognized in the UK Top 20 by the Chartered Association of Business Schools.
+            </p>
+        </div>
+    </section>
+
+    <!-- KEY HIGHLIGHTS -->
+    <section class="section-dark">
+        <div class="content-section">
+            <p class="section-label">Why Essex</p>
+            <h2 class="section-title">Key Highlights</h2>
+
+            <div class="highlights-grid">
+                <div class="highlight-item">
+                    <p class="highlight-title">UK Top 30</p>
+                    <p class="highlight-desc">Ranked #29 in the UK (Complete University Guide 2026)</p>
+                </div>
+                <div class="highlight-item">
+                    <p class="highlight-title">Top 20 Business</p>
+                    <p class="highlight-desc">Essex Business School ranked in UK Top 20 (CABS)</p>
+                </div>
+                <div class="highlight-item">
+                    <p class="highlight-title">Research Excellence</p>
+                    <p class="highlight-desc">Strong reputation in business and economics research</p>
+                </div>
+                <div class="highlight-item">
+                    <p class="highlight-title">Near London</p>
+                    <p class="highlight-desc">Colchester campus just 1 hour from central London</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- UNIVERSITY INFO -->
+    <section class="section-light">
+        <div class="content-section">
+            <p class="section-label">About the University</p>
+            <h2 class="section-title">University Profile</h2>
+
+            <p class="content-text">
+                The University of Essex is a public research university in Colchester, England. Founded in 1964, it has built a strong reputation for academic excellence and research impact. The university is known for its international outlook and commitment to transformative education.
+            </p>
+
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-value">#29</div>
+                    <div class="stat-label">UK Ranking</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">Top 20</div>
+                    <div class="stat-label">UK Business</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">1 hr</div>
+                    <div class="stat-label">From London</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DETAILS -->
+    <section class="section-dark">
+        <div class="content-section">
+            <p class="section-label">Program Details</p>
+            <h2 class="section-title">At a Glance</h2>
+
+            <ul class="info-list">
+                <li>
+                    <span class="info-label">Total Duration</span>
+                    <span class="info-value">4 Years (3 AU + 1 Essex)</span>
+                </li>
+                <li>
+                    <span class="info-label">Location</span>
+                    <span class="info-value">Colchester, England</span>
+                </li>
+                <li>
+                    <span class="info-label">Degrees Awarded</span>
+                    <span class="info-value">BBA (AU) + Master's (Essex)</span>
+                </li>
+                <li>
+                    <span class="info-label">UK Ranking</span>
+                    <span class="info-value">#29 Overall</span>
+                </li>
+                <li>
+                    <span class="info-label">Time Saved</span>
+                    <span class="info-value">1-2 Years vs Traditional</span>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section-light" style="padding: 80px 24px;">
+        <p class="section-label" style="text-align: center;">Learn More</p>
+        <h2 class="section-title" style="text-align: center;">Ready to Explore?</h2>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-top: 24px;">
+            <a href="https://www.essex.ac.uk" target="_blank" rel="noopener" class="btn btn-outline">Visit University Website</a>
+            <a href="../global.html#universities" class="btn btn-outline">Back to Global Options</a>
+            <a href="../apply.html" class="btn btn-outline">Apply to DDI</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-logo">DDI</div>
+        <p class="footer-text">Design & Digital Innovation | Assumption University Thailand</p>
+    </footer>
+</body>
+</html>

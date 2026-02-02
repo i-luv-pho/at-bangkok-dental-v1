@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technology & Innovation | DDI Four Pillars</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --black: #000000; --white: #ffffff; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; overflow-y: scroll; scrollbar-gutter: stable; }
+        body { font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--white); color: var(--black); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        .back-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(0, 0, 0, 0.95); padding: 16px 24px; }
+        .back-link { color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 14px; font-weight: 500; display: inline-flex; align-items: center; gap: 8px; transition: color 0.3s ease; }
+        .back-link:hover { color: white; }
+        section { padding: 120px 24px; display: flex; flex-direction: column; align-items: center; }
+        .section-dark { background: var(--black); color: var(--white); }
+        .section-light { background: var(--white); color: var(--black); }
+        .hero { padding-top: 160px; text-align: center; }
+        .pillar-label { font-size: 13px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.6; margin-bottom: 16px; }
+        .pillar-title { font-size: clamp(40px, 10vw, 72px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.0; margin-bottom: 24px; }
+        .pillar-subtitle { font-size: 18px; opacity: 0.7; max-width: 500px; }
+        .content-section { max-width: 700px; width: 100%; }
+        .section-label { font-size: 12px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; opacity: 0.5; margin-bottom: 16px; }
+        .section-title { font-size: clamp(28px, 5vw, 40px); font-weight: 700; margin-bottom: 32px; }
+        .content-text { font-size: 16px; line-height: 1.8; opacity: 0.85; margin-bottom: 24px; }
+        .philosophy-block { padding: 48px; border: 3px solid currentColor; margin: 48px 0; }
+        .philosophy-title { font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.6; margin-bottom: 16px; }
+        .philosophy-text { font-size: 20px; font-weight: 500; line-height: 1.6; }
+        .principles { margin: 48px 0; }
+        .principle { padding: 24px 0; border-bottom: 1px solid rgba(0,0,0,0.1); }
+        .principle:first-child { border-top: 1px solid rgba(0,0,0,0.1); }
+        .principle-number { font-size: 12px; font-weight: 700; letter-spacing: 0.2em; opacity: 0.4; margin-bottom: 8px; }
+        .principle-title { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+        .principle-desc { font-size: 14px; opacity: 0.7; line-height: 1.6; }
+        .btn { display: inline-block; padding: 16px 48px; font-size: 13px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; border: 2px solid currentColor; transition: all 0.3s ease; margin: 8px; }
+        .btn-outline { background: transparent; color: var(--black); }
+        .btn-outline:hover { background: var(--black); color: var(--white); }
+        footer { background: var(--black); color: var(--white); padding: 60px 24px; text-align: center; }
+        .footer-logo { font-size: 28px; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 16px; }
+        .footer-text { font-size: 13px; opacity: 0.5; }
+        @media (max-width: 768px) { section { padding: 80px 20px; } .hero { padding-top: 120px; } .philosophy-block { padding: 32px 24px; } }
+        @media (max-width: 375px) { section { padding: 60px 16px; } .pillar-title { font-size: clamp(32px, 12vw, 56px); } }
+    </style>
+</head>
+<body>
+    <nav class="back-nav"><a href="#" onclick="history.back(); return false;" class="back-link"><span>&larr;</span> Back</a></nav>
+    <section class="hero section-dark">
+        <p class="pillar-label">DDI Pillar</p>
+        <h1 class="pillar-title">Technology & Innovation</h1>
+        <p class="pillar-subtitle">Building with modern tools and understanding the systems that shape our world</p>
+    </section>
+    <section class="section-light">
+        <div class="content-section">
+            <p class="section-label">Philosophy</p>
+            <h2 class="section-title">The DDI Approach to Technology</h2>
+            <p class="content-text">Technology moves faster than curricula can update. DDI does not teach specific tools that will be obsolete in five years. Instead, students develop the capacity to learn any technology quickly and evaluate new tools critically.</p>
+            <p class="content-text">The focus is on principles over syntax. Understanding why systems are designed a certain way matters more than memorizing how to use them. This foundational knowledge transfers across platforms and frameworks.</p>
+            <div class="philosophy-block">
+                <p class="philosophy-title">Core Belief</p>
+                <p class="philosophy-text">Technology is a means, not an end. The best technologists understand the problem deeply before reaching for tools. Code is the last step, not the first.</p>
+            </div>
+            <p class="content-text">Students build real systems that serve real users. This creates accountability. When code breaks in production, lessons are learned that no simulation can teach. The pressure of shipping working software accelerates growth.</p>
+        </div>
+    </section>
+    <section class="section-light" style="padding-top: 0;">
+        <div class="content-section">
+            <p class="section-label">Methodology</p>
+            <h2 class="section-title">How We Teach Technology</h2>
+            <div class="principles">
+                <div class="principle">
+                    <p class="principle-number">01</p>
+                    <p class="principle-title">Problem-First Development</p>
+                    <p class="principle-desc">Every technical project starts with a clear problem statement. Students articulate what they are solving before writing any code. This prevents building solutions in search of problems.</p>
+                </div>
+                <div class="principle">
+                    <p class="principle-number">02</p>
+                    <p class="principle-title">Full Stack Exposure</p>
+                    <p class="principle-desc">Specialization comes later. DDI students gain familiarity across the stack: frontend, backend, data, infrastructure. This breadth enables better collaboration and system-level thinking.</p>
+                </div>
+                <div class="principle">
+                    <p class="principle-number">03</p>
+                    <p class="principle-title">AI as Collaborator</p>
+                    <p class="principle-desc">Modern development involves AI tools. Students learn to leverage these effectively: when to use them, when not to, and how to verify outputs. The goal is augmented capability, not dependency.</p>
+                </div>
+                <div class="principle">
+                    <p class="principle-number">04</p>
+                    <p class="principle-title">Ship Early, Ship Often</p>
+                    <p class="principle-desc">Working software in users' hands beats perfect code in development. DDI emphasizes deployment from the start. Students learn the full lifecycle: build, deploy, monitor, iterate.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section-light" style="padding: 80px 24px;">
+        <p class="section-label" style="text-align: center;">Explore More</p>
+        <h2 class="section-title" style="text-align: center;">Other Pillars</h2>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-top: 24px;">
+            <a href="business.html" class="btn btn-outline">Business</a>
+            <a href="design.html" class="btn btn-outline">Design</a>
+            <a href="individual.html" class="btn btn-outline">Individual</a>
+            <a href="../index.html#pillars" class="btn btn-outline">All Pillars</a>
+        </div>
+    </section>
+    <footer><div class="footer-logo">DDI</div><p class="footer-text">Design & Digital Innovation | Assumption University Thailand</p></footer>
+</body>
+</html>
