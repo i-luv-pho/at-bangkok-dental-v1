@@ -1,7 +1,7 @@
 {
   "passed": true,
-  "tested_at": "2026-02-02T04:26:00Z",
-  "tested_at_version": "e34ef9e",
+  "tested_at": "2026-02-02T04:30:00Z",
+  "tested_at_version": "89b2a72",
   "urls_tested": ["https://bangkokdental.pages.dev"],
   "screenshot_count": 1,
   "console_errors": 0,
