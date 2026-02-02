@@ -581,7 +581,20 @@
             margin: 0 auto;
         }
 
-        /* Responsive */
+        /* ============================================
+           RESPONSIVE - All Devices
+           Supports: iPhone 11-15, Samsung Galaxy S/A series (2017+)
+           ============================================ */
+
+        /* Tablets */
+        @media (max-width: 1024px) {
+            .doctors-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--space-4);
+            }
+        }
+
+        /* Tablets portrait and large phones */
         @media (max-width: 768px) {
             .doctors-grid {
                 grid-template-columns: 1fr;
@@ -590,6 +603,7 @@
 
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: var(--space-3);
             }
 
             .page-header {
@@ -597,15 +611,252 @@
                 min-height: 40vh;
             }
 
+            .page-header h1 {
+                font-size: clamp(2rem, 8vw, 3rem);
+            }
+
+            .page-header p {
+                font-size: 1rem;
+                padding: 0 var(--space-2);
+            }
+
             .cta-buttons {
                 flex-direction: column;
                 align-items: center;
+                width: 100%;
+                padding: 0 var(--space-2);
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+
+            .stat-number {
+                font-size: clamp(2rem, 6vw, 2.5rem);
+            }
+
+            .stat-label {
+                font-size: 0.75rem;
+            }
+
+            .doctor-card {
+                border-radius: 16px;
+            }
+
+            .doctor-info {
+                padding: var(--space-3);
+            }
+
+            .doctor-info h3 {
+                font-size: 1.25rem;
+            }
+
+            .doctor-info p {
+                font-size: 0.95rem;
+            }
+
+            .doctors-section {
+                padding: var(--space-8) var(--space-3);
+            }
+
+            .cta-section {
+                padding: var(--space-8) var(--space-3);
+            }
+
+            .cta-section h2 {
+                font-size: clamp(1.5rem, 6vw, 2rem);
             }
         }
 
+        /* Phones - iPhone 11+, Samsung S21+ (414-480px) */
         @media (max-width: 480px) {
+            :root {
+                --space-16: 4rem;
+                --space-12: 3rem;
+                --space-8: 2rem;
+            }
+
+            html {
+                font-size: 15px;
+            }
+
+            .nav {
+                padding: var(--space-2);
+            }
+
+            .nav-logo {
+                font-size: 1.25rem;
+            }
+
+            .nav-back {
+                font-size: 0.8rem;
+                padding: var(--space-1);
+            }
+
+            .page-header {
+                padding-top: calc(var(--space-8) + 70px);
+                min-height: 35vh;
+            }
+
+            .page-header h1 {
+                font-size: clamp(1.75rem, 8vw, 2.5rem);
+            }
+
             .stats-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--space-2);
+            }
+
+            .stat-item {
+                padding: var(--space-2);
+            }
+
+            .stat-number {
+                font-size: 1.75rem;
+            }
+
+            .stat-label {
+                font-size: 0.65rem;
+                letter-spacing: 0.05em;
+            }
+
+            .doctors-section {
+                padding: var(--space-6) var(--space-2);
+            }
+
+            .doctor-image {
+                aspect-ratio: 4/3;
+            }
+
+            .placeholder-icon {
+                width: 100px;
+                height: 100px;
+            }
+
+            .placeholder-icon svg {
+                width: 50px;
+                height: 50px;
+            }
+
+            .quick-actions {
+                bottom: var(--space-2);
+            }
+
+            .quick-action-btn {
+                width: 40px;
+                height: 40px;
+            }
+
+            .quick-action-btn svg {
+                width: 16px;
+                height: 16px;
+            }
+
+            .doctor-info {
+                padding: var(--space-3);
+            }
+
+            .doctor-title {
+                font-size: 0.7rem;
+            }
+
+            .doctor-info h3 {
+                font-size: 1.15rem;
+            }
+
+            .doctor-info p {
+                font-size: 0.9rem;
+                line-height: 1.5;
+                margin-bottom: var(--space-2);
+            }
+
+            .credential-tag {
+                font-size: 0.65rem;
+                padding: 4px 8px;
+            }
+
+            .doctor-credentials {
+                margin-bottom: var(--space-2);
+            }
+
+            .book-doctor-btn {
+                padding: var(--space-2);
+                font-size: 0.85rem;
+            }
+
+            .book-doctor-btn svg {
+                width: 16px;
+                height: 16px;
+            }
+
+            .cta-section {
+                padding: var(--space-8) var(--space-2);
+            }
+
+            .cta-section h2 {
+                font-size: 1.4rem;
+            }
+
+            .cta-section p {
+                font-size: 0.95rem;
+            }
+
+            .btn-primary, .btn-secondary {
+                padding: var(--space-2) var(--space-3);
+                font-size: 0.9rem;
+            }
+
+            .footer {
+                padding: var(--space-4) var(--space-2);
+            }
+
+            .footer p {
+                font-size: 0.75rem;
+            }
+        }
+
+        /* Small phones - iPhone SE, Samsung A series (320-375px) */
+        @media (max-width: 375px) {
+            html {
+                font-size: 14px;
+            }
+
+            .page-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .stat-number {
+                font-size: 1.5rem;
+            }
+
+            .doctor-info h3 {
+                font-size: 1.1rem;
+            }
+
+            .credential-tag {
+                font-size: 0.6rem;
+            }
+        }
+
+        /* Landscape phones */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .page-header {
+                min-height: 80vh;
+                padding-top: var(--space-8);
+            }
+
+            .page-header h1 {
+                font-size: 1.75rem;
+            }
+
+            .stats-section {
+                padding: var(--space-4) var(--space-2);
             }
         }
     </style>

@@ -689,8 +689,10 @@
 
         /* ============================================
            RESPONSIVE - MOBILE FIRST
+           Supports: iPhone 11-15, Samsung Galaxy S/A series (2017+)
            ============================================ */
 
+        /* Tablets and small laptops */
         @media (max-width: 1024px) {
             .credentials-grid,
             .location-grid {
@@ -701,11 +703,16 @@
             .services-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+
+            .container {
+                padding: 0 var(--space-3);
+            }
         }
 
+        /* Tablets portrait and large phones */
         @media (max-width: 768px) {
             section {
-                padding: var(--space-16) var(--space-4);
+                padding: var(--space-12) var(--space-3);
             }
 
             .nav-links {
@@ -718,27 +725,257 @@
 
             .services-grid {
                 grid-template-columns: 1fr;
+                gap: var(--space-3);
             }
 
             .carousel-item {
-                flex: 0 0 220px;
+                flex: 0 0 200px;
             }
 
             h1 {
-                font-size: clamp(2.5rem, 10vw, 4rem);
+                font-size: clamp(2rem, 10vw, 3.5rem);
+            }
+
+            h2 {
+                font-size: clamp(1.5rem, 6vw, 2.5rem);
+            }
+
+            .hero {
+                min-height: 85vh;
+            }
+
+            .hero-content {
+                padding: var(--space-3);
+            }
+
+            .hero-eyebrow {
+                font-size: 0.75rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .doctor-image {
+                height: 280px;
+            }
+
+            .experience-badge {
+                padding: var(--space-2) var(--space-3);
+            }
+
+            .credentials-list li {
+                padding: var(--space-2) 0;
+                font-size: 0.95rem;
+            }
+
+            .map-container iframe {
+                height: 280px;
+            }
+
+            .booking {
+                padding: var(--space-8) var(--space-3);
+            }
+
+            .booking-cta {
+                padding: var(--space-2) var(--space-4);
+                font-size: 1rem;
             }
         }
 
+        /* Phones - iPhone 11 Pro Max, 12 Pro Max, Samsung S21+ (414-430px) */
         @media (max-width: 480px) {
             :root {
-                --space-24: 8rem;
-                --space-16: 6rem;
-                --space-12: 4rem;
+                --space-24: 6rem;
+                --space-16: 4rem;
+                --space-12: 3rem;
+                --space-8: 2rem;
+            }
+
+            html {
+                font-size: 15px;
+            }
+
+            section {
+                padding: var(--space-8) var(--space-2);
+            }
+
+            .nav {
+                padding: var(--space-2);
+            }
+
+            .logo {
+                font-size: 1.25rem;
+            }
+
+            h1 {
+                font-size: clamp(1.75rem, 9vw, 2.5rem);
+                line-height: 1.15;
+            }
+
+            h2 {
+                font-size: clamp(1.35rem, 6vw, 2rem);
+            }
+
+            h3 {
+                font-size: clamp(1.1rem, 4vw, 1.35rem);
+            }
+
+            p {
+                font-size: 1rem;
+            }
+
+            .hero {
+                min-height: 90vh;
+            }
+
+            .hero-content {
+                padding: var(--space-2);
+            }
+
+            .hero-eyebrow {
+                font-size: 0.7rem;
+                letter-spacing: 0.15em;
+            }
+
+            .hero-description {
+                font-size: 0.95rem;
+                line-height: 1.6;
             }
 
             .hero-cta {
                 width: 100%;
                 justify-content: center;
+                padding: var(--space-2) var(--space-3);
+                font-size: 0.95rem;
+            }
+
+            .service-card {
+                padding: var(--space-3);
+            }
+
+            .service-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            .carousel-item {
+                flex: 0 0 180px;
+            }
+
+            .doctor-image {
+                height: 220px;
+            }
+
+            .credentials-list li {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--space-1);
+                padding: var(--space-2) 0;
+            }
+
+            .credentials-list svg {
+                width: 16px;
+                height: 16px;
+            }
+
+            .experience-badge {
+                font-size: 0.9rem;
+                padding: var(--space-2);
+            }
+
+            .experience-badge strong {
+                font-size: 1.5rem;
+            }
+
+            .location-info {
+                padding: var(--space-3);
+            }
+
+            .map-container iframe {
+                height: 220px;
+            }
+
+            .phone-link {
+                font-size: 1.1rem;
+            }
+
+            .booking-cta {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .mobile-menu a {
+                font-size: 1.25rem;
+                padding: var(--space-2) 0;
+            }
+
+            .section-eyebrow {
+                font-size: 0.7rem;
+            }
+        }
+
+        /* Small phones - iPhone SE, Samsung A series (320-375px) */
+        @media (max-width: 375px) {
+            html {
+                font-size: 14px;
+            }
+
+            :root {
+                --space-16: 3rem;
+                --space-12: 2.5rem;
+                --space-8: 1.5rem;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            h2 {
+                font-size: 1.3rem;
+            }
+
+            .hero {
+                min-height: 100vh;
+            }
+
+            .carousel-item {
+                flex: 0 0 160px;
+            }
+
+            .credentials-list span {
+                font-size: 0.85rem;
+            }
+
+            .service-card h3 {
+                font-size: 1rem;
+            }
+
+            .service-card p {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Landscape phones */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .hero {
+                min-height: 100vh;
+                padding-top: var(--space-12);
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .hero-description {
+                display: none;
+            }
+        }
+
+        /* High DPI displays */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .nav {
+                border-bottom: 0.5px solid var(--gray-100);
             }
         }
     </style>
