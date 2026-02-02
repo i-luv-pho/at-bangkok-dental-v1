@@ -1,11 +1,12 @@
 {
-  "ts": "2026-02-02T04:10:56Z",
-  "total_candidates": 1,
+  "ts": "2026-02-02T04:51:15Z",
+  "total_candidates": 2,
   "demoted_count": 0,
   "filtered_by_min_score": 0,
   "min_score_used": 0.12,
-  "injected_count": 1,
+  "injected_count": 2,
   "scores": [
+    0.605,
     0.605
   ]
 }
