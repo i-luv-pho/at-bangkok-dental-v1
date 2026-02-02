@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "tested_at": "2026-02-02T04:26:00Z",
+  "tested_at_version": "e34ef9e",
+  "urls_tested": ["https://bangkokdental.pages.dev"],
+  "screenshot_count": 1,
+  "console_errors": 0,
+  "network_errors": 0,
+  "content_errors": 0,
+  "failing_requests": [],
+  "content_errors_found": [],
+  "waivers_applied": 0,
+  "method": "playwright-screenshot",
+  "notes": "Full page screenshot captured via Playwright. Page renders correctly with Vanta.js waves, typography, and all sections visible."
+}
