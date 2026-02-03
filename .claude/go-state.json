@@ -1,0 +1,17 @@
+{
+  "iteration": 1,
+  "started_at": "2026-02-03T06:40:21Z",
+  "last_activity_at": "2026-02-03T06:40:21Z",
+  "session_id": "d2ae817a-2890-461d-93cb-ffd3f30db0bf",
+  "skill_type": "web",
+  "plan_mode_completed": true,
+  "parallel_mode": false,
+  "agent_id": null,
+  "worktree_path": null,
+  "coordinator": true,
+  "services": {},
+  "fixes_applied": [],
+  "verification_evidence": null,
+  "context_gathered": true,
+  "task": "Detected from user prompt"
+}

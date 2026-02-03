@@ -1051,34 +1051,25 @@
         text-align: center;
       }
 
-      .line-qr-placeholder {
+      .line-qr-link {
+        display: block;
         margin-bottom: var(--space-3);
-      }
-
-      .qr-placeholder-box {
-        width: 150px;
-        height: 150px;
-        margin: 0 auto;
-        background: var(--gray-100);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
         border-radius: 12px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        border: 2px dashed var(--gray-300);
       }
 
-      .qr-placeholder-box svg {
-        width: 60px;
-        height: 60px;
-        color: var(--gray-400);
-        margin-bottom: var(--space-1);
+      .line-qr-link:hover {
+        transform: scale(1.05);
       }
 
-      .qr-placeholder-box p {
-        font-size: 0.75rem;
-        color: var(--gray-500);
-        margin: 0;
+      .line-qr-image {
+        width: 180px;
+        height: 180px;
+        object-fit: contain;
+        border-radius: 12px;
+        background: white;
+        padding: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       }
 
       .line-id-display {
@@ -1885,21 +1876,9 @@
         <button class="line-popup-close" id="linePopupClose">&times;</button>
       </div>
       <div class="line-popup-body">
-        <div class="line-qr-placeholder">
-          <!-- Replace with actual QR code image -->
-          <div class="qr-placeholder-box">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <rect x="3" y="3" width="7" height="7" rx="1"/>
-              <rect x="14" y="3" width="7" height="7" rx="1"/>
-              <rect x="3" y="14" width="7" height="7" rx="1"/>
-              <rect x="14" y="14" width="4" height="4" rx="0.5"/>
-              <rect x="19" y="14" width="2" height="2" rx="0.25"/>
-              <rect x="14" y="19" width="2" height="2" rx="0.25"/>
-              <rect x="19" y="19" width="2" height="2" rx="0.25"/>
-            </svg>
-            <p>QR Code</p>
-          </div>
-        </div>
+        <a href="https://line.me/R/ti/p/@bangkokdental" target="_blank" class="line-qr-link">
+          <img src="qr-code.png" alt="LINE QR Code - Bangkok Dental Clinic" class="line-qr-image">
+        </a>
         <div class="line-id-display">
           <span class="line-id-label">LINE ID:</span>
           <span class="line-id">@bangkokdental</span>
