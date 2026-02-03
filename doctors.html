@@ -150,7 +150,7 @@
             align-items: center;
         }
 
-        .nav-logo {
+        .logo {
             font-family: var(--font-serif);
             font-size: 1.5rem;
             font-weight: 500;
@@ -159,12 +159,16 @@
             transition: var(--transition-fast);
         }
 
-        .nav-logo:hover {
+        .logo:hover {
             color: var(--accent);
         }
 
-        .nav-logo span {
+        .logo span {
             color: var(--accent);
+        }
+
+        .nav-hidden {
+            display: none;
         }
 
         .nav-back {
@@ -183,6 +187,89 @@
         .nav-back:hover {
             color: var(--accent);
             background: var(--accent-light);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--space-6);
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.875rem;
+            font-weight: 400;
+            color: var(--text-secondary);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: var(--transition-fast);
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent);
+        }
+
+        .nav-cta {
+            padding: var(--space-1) var(--space-3);
+            background: var(--accent);
+            color: var(--white) !important;
+            border-radius: 100px;
+        }
+
+        .nav-cta:hover {
+            background: var(--purple-600) !important;
+            color: var(--white) !important;
+        }
+
+        /* Mobile Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: var(--space-1);
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--text-primary);
+            transition: var(--transition-fast);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--white);
+            z-index: 999;
+            padding: var(--space-16) var(--space-4);
+            flex-direction: column;
+            gap: var(--space-4);
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        .mobile-menu a {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: var(--transition-fast);
+        }
+
+        .mobile-menu a:hover,
+        .mobile-menu a.active {
+            color: var(--accent);
         }
 
         /* Page Header with Vanta Background */
@@ -436,6 +523,22 @@
             background: var(--purple-100);
         }
 
+        /* 3D Tilt Effect */
+        .doctor-card {
+            transform-style: preserve-3d;
+        }
+
+        .tilt-shine {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: inherit;
+            pointer-events: none;
+            z-index: 10;
+        }
+
         /* Book Button */
         .book-doctor-btn {
             display: flex;
@@ -596,6 +699,19 @@
 
         /* Tablets portrait and large phones */
         @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .mobile-menu a {
+                font-size: 1.5rem;
+                padding: var(--space-2) 0;
+            }
+
             .doctors-grid {
                 grid-template-columns: 1fr;
                 gap: var(--space-4);
@@ -686,7 +802,7 @@
                 padding: var(--space-2);
             }
 
-            .nav-logo {
+            .logo {
                 font-size: 1.25rem;
             }
 
@@ -863,17 +979,31 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="nav">
+    <nav class="nav scrolled">
         <div class="nav-inner">
-            <a href="index.html" class="nav-logo"><span>@</span>Bangkok Dental</a>
-            <a href="index.html" class="nav-back">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M19 12H5M12 19l-7-7 7-7"/>
-                </svg>
-                Back to Home
-            </a>
+            <a href="index.html" class="logo"><span>@</span>Bangkok Dental</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li class="nav-hidden"><a href="index.html#services">Services</a></li>
+                <li class="nav-hidden"><a href="doctors.html" class="active">Doctors</a></li>
+                <li class="nav-hidden"><a href="index.html#location">Location</a></li>
+                <li><a href="index.html#booking" class="nav-cta">Book Now</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
+
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="index.html">Home</a>
+        <a href="index.html#services" class="nav-hidden">Services</a>
+        <a href="doctors.html" class="active nav-hidden">Doctors</a>
+        <a href="index.html#location" class="nav-hidden">Location</a>
+        <a href="index.html#booking">Book Now</a>
+    </div>
 
     <!-- Page Header with Vanta Background -->
     <header class="page-header">
@@ -909,34 +1039,15 @@
     <!-- Doctors Grid -->
     <section class="doctors-section">
         <div class="doctors-grid">
-            <!-- Doctor 1 - Lead -->
+            <!-- Dr. Photjana Kittipibul -->
             <article class="doctor-card" data-delay="0">
+                <div class="tilt-shine"></div>
                 <div class="doctor-image">
-                    <!-- Replace with actual image: <img src="doctor1.jpg" alt="Dr. Photjana Kittipibul"> -->
-                    <div class="placeholder-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                            <circle cx="12" cy="7" r="4"/>
-                        </svg>
-                    </div>
-                    <div class="quick-actions">
-                        <button class="quick-action-btn" title="Call">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-                            </svg>
-                        </button>
-                        <button class="quick-action-btn" title="Email">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                                <polyline points="22,6 12,13 2,6"/>
-                            </svg>
-                        </button>
-                    </div>
+                    <img src="dr-photjana.jpg" alt="Dr. Photjana Kittipibul">
                 </div>
                 <div class="doctor-info">
                     <p class="doctor-title">Lead Orthodontist</p>
                     <h3>Dr. Photjana Kittipibul</h3>
-                    <p>40+ years of excellence in orthodontics. Former Associate Dean of Mahidol University Dental School. Taught orthodontics at Temple University and Sydney University.</p>
                     <div class="doctor-credentials">
                         <span class="credential-tag">Assoc. Dean, Mahidol</span>
                         <span class="credential-tag">Professor, Temple U.</span>
@@ -950,42 +1061,22 @@
                             <line x1="8" y1="2" x2="8" y2="6"/>
                             <line x1="3" y1="10" x2="21" y2="10"/>
                         </svg>
-                        Book with Dr. Photjana
+                        Book Consultation
                     </a>
                 </div>
             </article>
 
-            <!-- Doctor 2 -->
-            <article class="doctor-card" data-delay="150">
+            <!-- Dr. Akanin Santivitoonvong -->
+            <article class="doctor-card" data-delay="100">
+                <div class="tilt-shine"></div>
                 <div class="doctor-image">
-                    <!-- Replace with actual image: <img src="doctor2.jpg" alt="Dr. [Name]"> -->
-                    <div class="placeholder-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                            <circle cx="12" cy="7" r="4"/>
-                        </svg>
-                    </div>
-                    <div class="quick-actions">
-                        <button class="quick-action-btn" title="Call">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-                            </svg>
-                        </button>
-                        <button class="quick-action-btn" title="Email">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                                <polyline points="22,6 12,13 2,6"/>
-                            </svg>
-                        </button>
-                    </div>
+                    <img src="dr-akanin.jpg" alt="Dr. Akanin Santivitoonvong">
                 </div>
                 <div class="doctor-info">
-                    <p class="doctor-title">General Dentist</p>
-                    <h3>Dr. [Doctor Name]</h3>
-                    <p>Specializing in comprehensive dental care with a gentle approach and unwavering attention to patient comfort and well-being.</p>
+                    <p class="doctor-title">Orthodontist Specialist</p>
+                    <h3>Dr. Akanin Santivitoonvong</h3>
                     <div class="doctor-credentials">
-                        <span class="credential-tag">DDS Degree</span>
-                        <span class="credential-tag">10+ Years Experience</span>
+                        <span class="credential-tag">DDS</span>
                     </div>
                     <a href="index.html#booking" class="book-doctor-btn">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -999,37 +1090,68 @@
                 </div>
             </article>
 
-            <!-- Doctor 3 -->
-            <article class="doctor-card" data-delay="300">
+            <!-- Dr. Sasima Sumanavadee -->
+            <article class="doctor-card" data-delay="200">
+                <div class="tilt-shine"></div>
                 <div class="doctor-image">
-                    <!-- Replace with actual image: <img src="doctor3.jpg" alt="Dr. [Name]"> -->
-                    <div class="placeholder-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                            <circle cx="12" cy="7" r="4"/>
-                        </svg>
-                    </div>
-                    <div class="quick-actions">
-                        <button class="quick-action-btn" title="Call">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-                            </svg>
-                        </button>
-                        <button class="quick-action-btn" title="Email">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                                <polyline points="22,6 12,13 2,6"/>
-                            </svg>
-                        </button>
-                    </div>
+                    <img src="dr-sasima.jpg" alt="Dr. Sasima Sumanavadee">
                 </div>
                 <div class="doctor-info">
-                    <p class="doctor-title">Cosmetic Dentist</p>
-                    <h3>Dr. [Doctor Name]</h3>
-                    <p>Expert in aesthetic dentistry, veneers, and smile makeovers with an artistic eye for natural beauty and stunning results.</p>
+                    <p class="doctor-title">Periodontist</p>
+                    <h3>Dr. Sasima Sumanavadee</h3>
                     <div class="doctor-credentials">
-                        <span class="credential-tag">Cosmetic Certification</span>
-                        <span class="credential-tag">Veneer Specialist</span>
+                        <span class="credential-tag">DDS</span>
+                        <span class="credential-tag">Cert. in Periodontics</span>
+                    </div>
+                    <a href="index.html#booking" class="book-doctor-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                            <line x1="16" y1="2" x2="16" y2="6"/>
+                            <line x1="8" y1="2" x2="8" y2="6"/>
+                            <line x1="3" y1="10" x2="21" y2="10"/>
+                        </svg>
+                        Book Consultation
+                    </a>
+                </div>
+            </article>
+
+            <!-- Dr. Ratacha Chingsuwanroj -->
+            <article class="doctor-card" data-delay="300">
+                <div class="tilt-shine"></div>
+                <div class="doctor-image">
+                    <img src="dr-ratacha.jpg" alt="Dr. Ratacha Chingsuwanroj">
+                </div>
+                <div class="doctor-info">
+                    <p class="doctor-title">General Dentist</p>
+                    <h3>Dr. Ratacha Chingsuwanroj</h3>
+                    <div class="doctor-credentials">
+                        <span class="credential-tag">DDS</span>
+                    </div>
+                    <a href="index.html#booking" class="book-doctor-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                            <line x1="16" y1="2" x2="16" y2="6"/>
+                            <line x1="8" y1="2" x2="8" y2="6"/>
+                            <line x1="3" y1="10" x2="21" y2="10"/>
+                        </svg>
+                        Book Consultation
+                    </a>
+                </div>
+            </article>
+
+            <!-- Dr. Parichat Chinchiyanont -->
+            <article class="doctor-card" data-delay="400">
+                <div class="tilt-shine"></div>
+                <div class="doctor-image">
+                    <img src="dr-parichat.jpg" alt="Dr. Parichat Chinchiyanont">
+                </div>
+                <div class="doctor-info">
+                    <p class="doctor-title">Endodontist</p>
+                    <h3>Dr. Parichat Chinchiyanont</h3>
+                    <div class="doctor-credentials">
+                        <span class="credential-tag">DDS</span>
+                        <span class="credential-tag">Dip.</span>
+                        <span class="credential-tag">Thai Board (Endodontics)</span>
                     </div>
                     <a href="index.html#booking" class="book-doctor-btn">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1060,7 +1182,7 @@
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
                 </svg>
-                Call 02-279-6990
+                Call&nbsp;02&#8209;279&#8209;6990
             </a>
         </div>
     </section>
@@ -1090,6 +1212,23 @@
                 zoom: 0.75
             });
         }
+
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        hamburger.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            document.body.classList.toggle('menu-open');
+        });
+
+        // Close mobile menu on link click
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                document.body.classList.remove('menu-open');
+            });
+        });
 
         // Intersection Observer for scroll animations
         const observerOptions = {
@@ -1154,6 +1293,48 @@
         if (statsSection) {
             statsObserver.observe(statsSection);
         }
+
+        // ============================================
+        // 3D TILT CARD EFFECT
+        // ============================================
+        const doctorCards = document.querySelectorAll('.doctor-card');
+
+        doctorCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = (y - centerY) / 15;
+                const rotateY = (centerX - x) / 15;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-12px) scale3d(1.02, 1.02, 1.02)`;
+
+                // Move shine effect
+                const shine = card.querySelector('.tilt-shine');
+                if (shine) {
+                    const shineX = (x / rect.width) * 100;
+                    const shineY = (y / rect.height) * 100;
+                    shine.style.background = `radial-gradient(circle at ${shineX}% ${shineY}%, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 50%)`;
+                }
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0) scale3d(1, 1, 1)';
+                card.style.transition = 'transform 0.5s ease, box-shadow 0.5s ease';
+
+                const shine = card.querySelector('.tilt-shine');
+                if (shine) {
+                    shine.style.background = '';
+                }
+            });
+
+            card.addEventListener('mouseenter', () => {
+                card.style.transition = 'transform 0.1s ease';
+            });
+        });
     </script>
 </body>
 </html>

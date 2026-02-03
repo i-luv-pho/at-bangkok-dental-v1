@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clear Aligners | @Bangkok Dental Clinic</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%239B8ACB' d='M50 10c-22 0-40 18-40 40s18 40 40 40 40-18 40-40-18-40-40-40zm0 70c-16.5 0-30-13.5-30-30s13.5-30 30-30 30 13.5 30 30-13.5 30-30 30z'/%3E%3C/svg%3E">
+
+    <!-- Meta Tags -->
+    <meta name="description" content="Clear aligners at @Bangkok Dental Clinic - Invisalign and virtually invisible orthodontic treatment.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <!-- Vanta.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
+
+    <style>
+        :root {
+            --purple-50: #FAF8FF;
+            --purple-100: #F3EEFF;
+            --purple-200: #E8DEFF;
+            --purple-300: #D4C4F5;
+            --purple-400: #B9A3E8;
+            --purple-500: #9B8ACB;
+            --purple-600: #7B6BA8;
+            --purple-700: #5D4F85;
+            --gray-50: #FAFAFA;
+            --gray-100: #F5F5F5;
+            --gray-200: #EEEEEE;
+            --gray-300: #E0E0E0;
+            --gray-400: #BDBDBD;
+            --gray-500: #8E8E8E;
+            --gray-600: #757575;
+            --gray-800: #424242;
+            --gray-900: #212121;
+            --white: #FFFFFF;
+            --black: #1A1A1A;
+            --background: var(--white);
+            --text-primary: var(--gray-900);
+            --text-secondary: var(--gray-500);
+            --accent: var(--purple-500);
+            --accent-light: var(--purple-100);
+            --font-serif: 'Spectral', Georgia, serif;
+            --font-sans: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+            --space-1: 0.5rem;
+            --space-2: 1rem;
+            --space-3: 1.5rem;
+            --space-4: 2rem;
+            --space-6: 3rem;
+            --space-8: 4rem;
+            --space-12: 6rem;
+            --space-16: 8rem;
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-fast: 0.2s var(--ease-out);
+            --transition-medium: 0.4s var(--ease-out);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body {
+            font-family: var(--font-sans);
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-serif);
+            font-weight: 400;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+        h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 300; }
+        h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
+        h3 { font-size: clamp(1.1rem, 2vw, 1.35rem); }
+        p { font-size: 1.125rem; color: var(--text-secondary); }
+
+        .nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: var(--space-3) var(--space-4);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--gray-100);
+        }
+        .nav-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-logo {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+        .nav-logo:hover { color: var(--accent); }
+        .nav-logo span { color: var(--accent); }
+        .nav-links { display: flex; gap: var(--space-6); list-style: none; }
+        .nav-links a {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: var(--transition-fast);
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+        .nav-cta {
+            padding: var(--space-1) var(--space-3);
+            background: var(--accent);
+            color: var(--white) !important;
+            border-radius: 100px;
+        }
+        .nav-cta:hover { background: var(--purple-600) !important; }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: var(--space-1);
+        }
+        .hamburger span { display: block; width: 24px; height: 2px; background: var(--text-primary); }
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: var(--white);
+            z-index: 999;
+            padding: var(--space-16) var(--space-4);
+            flex-direction: column;
+            gap: var(--space-4);
+        }
+        .mobile-menu.active { display: flex; }
+        .mobile-menu a {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .hero {
+            position: relative;
+            padding: calc(var(--space-16) + 80px) var(--space-4) var(--space-12);
+            min-height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        #vanta-bg {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 800px;
+        }
+        .hero-eyebrow {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: var(--space-2);
+        }
+        .hero h1 { margin-bottom: var(--space-3); }
+        .hero-content > p { max-width: 600px; margin: 0 auto; }
+
+        .content-section {
+            padding: var(--space-12) var(--space-4);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .content-section h2 {
+            margin-bottom: var(--space-4);
+            color: var(--text-primary);
+        }
+        .content-section p { margin-bottom: var(--space-3); }
+
+        .types-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-4);
+            margin: var(--space-6) 0;
+        }
+        .type-card {
+            background: var(--gray-50);
+            border-radius: 16px;
+            padding: var(--space-4);
+            text-align: center;
+        }
+        .type-card h3 { margin-bottom: var(--space-2); color: var(--accent); }
+        .type-card p { font-size: 1rem; }
+
+        .benefits-list {
+            list-style: none;
+            margin: var(--space-4) 0;
+        }
+        .benefits-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-2);
+            padding: var(--space-2) 0;
+            border-bottom: 1px solid var(--gray-100);
+        }
+        .benefits-list li:last-child { border-bottom: none; }
+        .benefits-list svg {
+            width: 24px;
+            height: 24px;
+            color: var(--accent);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .benefits-list span { font-size: 1.1rem; color: var(--text-secondary); }
+
+        .cta-section {
+            padding: var(--space-12) var(--space-4);
+            text-align: center;
+            background: linear-gradient(180deg, var(--white) 0%, var(--purple-50) 100%);
+        }
+        .cta-section h2 { margin-bottom: var(--space-3); }
+        .cta-section p { max-width: 500px; margin: 0 auto var(--space-6); }
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-1);
+            padding: var(--space-2) var(--space-4);
+            background: var(--accent);
+            color: var(--white);
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: var(--transition-fast);
+            box-shadow: 0 4px 20px rgba(155, 138, 203, 0.3);
+        }
+        .btn-primary:hover {
+            background: var(--purple-600);
+            transform: translateY(-3px);
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-1);
+            margin-bottom: var(--space-4);
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: var(--transition-fast);
+        }
+        .back-link:hover { color: var(--accent); }
+        .back-link svg { width: 16px; height: 16px; }
+
+        .footer {
+            padding: var(--space-6) var(--space-4);
+            text-align: center;
+            border-top: 1px solid var(--gray-100);
+        }
+        .footer p { font-size: 0.875rem; margin: 0 auto; }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .hero { min-height: 40vh; }
+        }
+        @media (max-width: 480px) {
+            .nav { padding: var(--space-2); }
+            .nav-logo { font-size: 1.25rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo"><span>@</span>Bangkok Dental</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html" class="active">Services</a></li>
+                <li><a href="doctors.html">Doctors</a></li>
+                <li><a href="index.html#location">Location</a></li>
+                <li><a href="index.html#booking" class="nav-cta">Book Now</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="index.html">Home</a>
+        <a href="services.html" class="active">Services</a>
+        <a href="doctors.html">Doctors</a>
+        <a href="index.html#location">Location</a>
+        <a href="index.html#booking">Book Now</a>
+    </div>
+
+    <section class="hero">
+        <div id="vanta-bg"></div>
+        <div class="hero-content">
+            <p class="hero-eyebrow">Orthodontic Treatment</p>
+            <h1>Clear Aligners</h1>
+            <p>Virtually invisible aligners for discreet orthodontic treatment without metal brackets. Straighten your teeth without anyone knowing.</p>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <a href="services.html" class="back-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            All Services
+        </a>
+
+        <h2>What Are Clear Aligners?</h2>
+        <p>Clear aligners are a modern orthodontic treatment using a series of custom-made, transparent plastic trays to gradually shift your teeth into their ideal positions. Each set of aligners is worn for about two weeks before progressing to the next set.</p>
+        <p>Our clinic offers both Invisalign and other premium clear aligner systems, allowing us to recommend the best solution for your specific needs and budget.</p>
+
+        <div class="types-grid">
+            <div class="type-card">
+                <h3>Invisalign</h3>
+                <p>The world's leading clear aligner brand with advanced 3D imaging and treatment planning technology.</p>
+            </div>
+            <div class="type-card">
+                <h3>Premium Alternatives</h3>
+                <p>High-quality clear aligner options offering excellent results at different price points.</p>
+            </div>
+        </div>
+
+        <h2>Benefits of Clear Aligners</h2>
+        <ul class="benefits-list">
+            <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <span>Virtually invisible - most people won't notice you're undergoing treatment</span>
+            </li>
+            <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <span>Removable for eating, drinking, and special occasions</span>
+            </li>
+            <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <span>More comfortable than traditional braces with no metal wires</span>
+            </li>
+            <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <span>Easier to maintain oral hygiene during treatment</span>
+            </li>
+            <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <span>Fewer office visits required compared to traditional braces</span>
+            </li>
+        </ul>
+
+        <h2>Is This Right For You?</h2>
+        <p>Clear aligners work best for mild to moderate orthodontic issues. They're ideal for adults and teens who want a discreet treatment option. During your consultation, we'll assess whether clear aligners are suitable for your case or if traditional braces might be more effective.</p>
+    </section>
+
+    <section class="cta-section">
+        <h2>Start Your Clear Aligner Journey</h2>
+        <p>Schedule a consultation to see if clear aligners are the right choice for your smile transformation.</p>
+        <a href="index.html#booking" class="btn-primary">
+            Book Consultation
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2025 @Bangkok Dental Clinic. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof VANTA !== 'undefined') {
+                VANTA.WAVES({
+                    el: "#vanta-bg",
+                    mouseControls: true,
+                    touchControls: true,
+                    gyroControls: false,
+                    minHeight: 200.00,
+                    minWidth: 200.00,
+                    scale: 1.00,
+                    scaleMobile: 1.00,
+                    color: 0xd4c4f5,
+                    shininess: 35.00,
+                    waveHeight: 15.00,
+                    waveSpeed: 0.75,
+                    zoom: 0.75
+                });
+            }
+        });
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobile-menu');
+        hamburger.addEventListener('click', () => mobileMenu.classList.toggle('active'));
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.remove('active'));
+        });
+    </script>
+</body>
+</html>
