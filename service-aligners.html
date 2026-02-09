@@ -183,7 +183,7 @@
             margin-bottom: var(--space-2);
         }
         .hero h1 { margin-bottom: var(--space-3); }
-        .hero-content > p { max-width: 600px; margin: 0 auto; }
+        .hero-content > p { max-width: 600px; margin: 0 auto; color: var(--gray-700); text-shadow: 0 1px 3px rgba(255,255,255,0.8); }
 
         .content-section {
             padding: var(--space-12) var(--space-4);
@@ -280,7 +280,11 @@
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .hamburger { display: flex; }
-            .hero { min-height: 40vh; }
+            .hero {
+                min-height: auto;
+                padding-top: calc(var(--space-12) + 60px);
+                padding-bottom: var(--space-6);
+            }
         }
         @media (max-width: 480px) {
             .nav { padding: var(--space-2); }
